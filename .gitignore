@@ -59,3 +59,14 @@ typings/
 
 # next.js build output
 .next
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# Serverless directories
+.serverless/
+
+# Idea
+.idea/
+
+app/

@@ -1,0 +1,35 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "charset": "utf8",
+    "allowJs": false,
+    "pretty": true,
+    "noEmitOnError": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "strictPropertyInitialization": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": false,
+    "skipDefaultLibCheck": true,
+    "inlineSourceMap": true,
+    "importHelpers": true,
+    "outDir": "../app"
+  },
+  "exclude": [
+    "dist*",
+    "node_modules*"
+  ],
+  "include": [
+    "public",
+    "src/**/*",
+    "package.json"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "@o-w-o/app--draft",
+  "version": "1.0.0",
+  "description": "o-w-o/app draft",
+  "scripts": {
+    "dev": "NODE_ENV=development npm run dev:server & npm run dev:client",
+    "dev:ms": "set NODE_ENV=development && npm run dev:ms:server & npm run dev:ms:client",
+    "dev:server": "cd ./server && npm run dev:start",
+    "dev:client": "cd ./client && npm run start",
+    "dev:ms:server": "cd ./server && npm run dev:start",
+    "dev:ms:client": "cd ./client && npm run start",
+    "script:version": "node ./script/version.js",
+    "script:port": "node ./script/port.js",
+    "build:client": "cd ./client && npm run build",
+    "build:proxy": "cd ./proxy && npm run build",
+    "cp:proxy": "cp ./proxy/package.json ./app",
+    "release:clean": "rimraf app/**",
+    "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
+  },
+  "dependencies": {
+    "execa": "^2.0.4",
+    "rimraf": "^3.0.0",
+    "yargs": "^15.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@commitlint/config-lerna-scopes": "^8.1.0",
+    "@commitlint/prompt": "^8.1.0",
+    "@o-w-o/eslint-config": "^1.0.0-alpha.0",
+    "@types/yargs": "^13.0.3",
+    "commitizen": "^4.0.3",
+    "conventional-changelog": "^3.1.10",
+    "conventional-changelog-cli": "^2.0.23",
+    "danger": "^9.1.8",
+    "eslint": "^6.5.1",
+    "eslint-formatter-friendly": "^7.0.0",
+    "husky": "^3.0.4",
+    "lerna": "^3.16.4",
+    "lint-staged": "^9.2.2",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "semver": "^6.3.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@commitlint/prompt"
+    }
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:o-w-o/ink.git"
+  },
+  "author": "symbols@o-w-o.ink",
+  "eslintIgnore": [
+    "coverage",
+    "dist"
+  ],
+  "license": "MIT"
+}
