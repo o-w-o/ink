@@ -9,7 +9,7 @@ node {
   def ioStore = [:]
 
   def dockerConfig = [:]
-  dockerConfig.imageName = 'node:10-alpine'
+  dockerConfig.imageName = 'app-starter'
   dockerConfig.imageRunParams = "-u root -v /var/npm/v10/node_modules:/root/.node_modules -v /var/npm/v10/node_global_modules:/root/.node_global_modules"
 
   stage('Prepare') {
@@ -23,17 +23,17 @@ node {
       sh "npm config set prefix ~/.node_global_modules && npm config set cache ~/.node_modules"
 
       echo "1.3 安装 npm"
-      sh "npm i --production"
+      sh "npm ci --production"
 
       echo '1.4 获取 项目 package.json 中的应用信息'
-      ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./scripts/port.js").trim()
+      ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()
 
       ioStore.dockerArgsDistDir = 'app'
 
       ioStore.stashMark = 'src-server-build'
       ioStore.stashIncludeRegex = "**/${ioStore.dockerArgsDistDir}/*"
 
-      ioStore.dockerTag = sh(returnStdout: true, script: "node ./scripts/version.js").trim().toLowerCase()
+      ioStore.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
 
       ioStore.dockerImageName = "${aliDockerRegistry}/${aliDockerName}"
       ioStore.dockerVpcImageName = "${aliDockerVpcRegistry}/${aliDockerName}"

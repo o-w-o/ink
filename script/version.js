@@ -5,14 +5,19 @@ const { argv } = yargs.options({
   target: { type: "string", default: "server" },
 });
 
-let version = "latest";
+let version;
 
 switch (argv.target) {
   case "server": {
     version = require("../src/server/package.json").version;
+    break;
   }
   case "client": {
     version = require("../src/client/package.json").version;
+    break;
+  }
+  default: {
+    version = "latest"
   }
 }
 

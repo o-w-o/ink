@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 let port = 3000;
-const execa = require('execa')
 
-execa.commandSync('npm')
+if (process.env.NODE_ENV === "draft") {
+  port = 3001;
+}
 
 console.log(port);

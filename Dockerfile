@@ -10,8 +10,8 @@ WORKDIR /app
 # 复制打包完成后的文件到 /app 目录下
 COPY ${DIST_DIR} .
 
-RUN npm i -g nodemone
-RUN npm i -production
+RUN npm ci -g nodemone
+RUN npm ci -production
 
 # 使用端口 3000 [默认]
 EXPOSE ${PORT}

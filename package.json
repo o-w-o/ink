@@ -11,14 +11,15 @@
     "dev:ms:client": "cd ./client && npm run start",
     "script:version": "node ./script/version.js",
     "script:port": "node ./script/port.js",
-    "build:client": "cd ./client && npm run build",
-    "build:proxy": "cd ./proxy && npm run build",
+    "build:client": "cd ./client && npm ci -production && npm run build",
+    "build:proxy": "cd ./proxy && npm ci -production && npm run build",
     "cp:proxy": "cp ./proxy/package.json ./app",
     "release:clean": "rimraf app/**",
     "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
   },
   "dependencies": {
     "execa": "^2.0.4",
+    "inquirer": "^7.0.0",
     "rimraf": "^3.0.0",
     "yargs": "^15.0.2"
   },
@@ -28,6 +29,7 @@
     "@commitlint/config-lerna-scopes": "^8.1.0",
     "@commitlint/prompt": "^8.1.0",
     "@o-w-o/eslint-config": "^1.0.0-alpha.0",
+    "@types/inquirer": "^6.5.0",
     "@types/yargs": "^13.0.3",
     "commitizen": "^4.0.3",
     "conventional-changelog": "^3.1.10",
