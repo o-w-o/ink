@@ -26,14 +26,14 @@ node {
       sh "npm i --production"
 
       echo '1.4 获取 项目 package.json 中的应用信息'
-      ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./scripts/port.js").trim()
+      ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()
 
       ioStore.dockerArgsDistDir = 'app'
 
       ioStore.stashMark = 'src-server-build'
       ioStore.stashIncludeRegex = "**/${ioStore.dockerArgsDistDir}/*"
 
-      ioStore.dockerTag = sh(returnStdout: true, script: "node ./scripts/version.js").trim().toLowerCase()
+      ioStore.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
 
       ioStore.dockerImageName = "${aliDockerRegistry}/${aliDockerName}"
       ioStore.dockerVpcImageName = "${aliDockerVpcRegistry}/${aliDockerName}"
