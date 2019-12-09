@@ -11,10 +11,10 @@
     "dev:ms:client": "cd ./client && npm run start",
     "script:version": "node ./script/version.js",
     "script:port": "node ./script/port.js",
-    "build:client": "cd ./client && npm ci -production && npm run build",
-    "build:proxy": "cd ./proxy && npm ci -production && npm run build",
+    "build:client": "cd ./client && npm ci && npm run build",
+    "build:proxy": "cd ./proxy && npm ci && npm run build",
     "cp:proxy": "cp ./proxy/package.json ./app",
-    "release:clean": "rimraf app/**",
+    "release:clean": "rimraf app && mkdir app",
     "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
   },
   "dependencies": {
