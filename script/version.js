@@ -9,11 +9,11 @@ let version;
 
 switch (argv.target) {
   case "server": {
-    version = require("../src/server/package.json").version;
+    version = require("../proxy/package.json").version;
     break;
   }
   case "client": {
-    version = require("../src/client/package.json").version;
+    version = require("../client/package.json").version;
     break;
   }
   default: {

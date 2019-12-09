@@ -9,36 +9,39 @@ node {
   def ioStore = [:]
 
   def dockerConfig = [:]
-  dockerConfig.imageName = 'app-starter'
+  dockerConfig.imageName = "${aliDockerVpcRegistry}/app-starter"
   dockerConfig.imageRunParams = "-u root -v /var/npm/v10/node_modules:/root/.node_modules -v /var/npm/v10/node_global_modules:/root/.node_global_modules"
 
   stage('Prepare') {
-    docker.image(dockerConfig.imageName).inside(dockerConfig.imageRunParams) {
-      echo "1 Prepare Stage"
 
-      echo "1.1 检验 npm 版本"
-      sh "npm -v"
+    docker.withRegistry("https://${aliDockerVpcRegistry}", 'aliDockerRegistry') {
+      docker.image(dockerConfig.imageName).inside(dockerConfig.imageRunParams) {
+        echo "1 Prepare Stage"
 
-      echo "1.2 设置 npm 缓存地址"
-      sh "npm config set prefix ~/.node_global_modules && npm config set cache ~/.node_modules"
+        echo "1.1 检验 npm 版本"
+        sh "npm -v"
 
-      echo "1.3 安装 npm"
-      sh "npm ci --production"
+        echo "1.2 设置 npm 缓存地址"
+        sh "npm config set prefix ~/.node_global_modules && npm config set cache ~/.node_modules"
 
-      echo '1.4 获取 项目 package.json 中的应用信息'
-      ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()
+        echo "1.3 安装 npm"
+        sh "npm ci --production"
 
-      ioStore.dockerArgsDistDir = 'app'
+        echo '1.4 获取 项目 package.json 中的应用信息'
+        ioStore.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()
 
-      ioStore.stashMark = 'src-server-build'
-      ioStore.stashIncludeRegex = "**/${ioStore.dockerArgsDistDir}/*"
+        ioStore.dockerArgsDistDir = 'app'
 
-      ioStore.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
+        ioStore.stashMark = 'src-server-build'
+        ioStore.stashIncludeRegex = "**/${ioStore.dockerArgsDistDir}/*"
 
-      ioStore.dockerImageName = "${aliDockerRegistry}/${aliDockerName}"
-      ioStore.dockerVpcImageName = "${aliDockerVpcRegistry}/${aliDockerName}"
-      ioStore.dockerImageNameWithTag = "${ioStore.dockerImageName}:${ioStore.dockerTag}"
+        ioStore.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
 
+        ioStore.dockerImageName = "${aliDockerRegistry}/${aliDockerName}"
+        ioStore.dockerVpcImageName = "${aliDockerVpcRegistry}/${aliDockerName}"
+        ioStore.dockerImageNameWithTag = "${ioStore.dockerImageName}:${ioStore.dockerTag}"
+
+      }
     }
   }
 
