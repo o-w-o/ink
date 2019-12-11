@@ -89,7 +89,7 @@ node {
         }
 
         echo "4.3 构建 Image"
-        ioStore.dockerImage = docker.build(ioStore.dockerVpcImageName, "--build-arg DIST_DIR=${ioStore.dockerArgsDistDir} PORT=${ioStore.dockerArgsPort} .")
+        ioStore.dockerImage = docker.build(ioStore.dockerVpcImageName, "--build-arg DIST_DIR=${ioStore.dockerArgsDistDir} --build-arg PORT=${ioStore.dockerArgsPort} .")
 
         echo "4.4 发布 Image"
         ioStore.dockerImage.push("${ioStore.dockerTag}")

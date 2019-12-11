@@ -26,10 +26,5 @@
   "exclude": [
     "dist*",
     "node_modules*"
-  ],
-  "include": [
-    "public",
-    "src/**/*",
-    "package.json"
   ]
 }
