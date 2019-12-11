@@ -63,7 +63,6 @@ node {
         echo "2 Build Docker Image Stage"
 
         echo '2.1 使用 npm 打包'
-        sh "npm login "
         sh "npm run release"
 
         echo "2.2 保存打包后的文件以备后续使用"
