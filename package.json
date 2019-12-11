@@ -16,6 +16,7 @@
     "build:proxy": "cd ./proxy && npm ci && npm run build",
     "cp:proxy": "cp ./proxy/package.json ./app",
     "release:clean": "rimraf app && mkdir app",
+    "release:debug": "npm run release:clean && npm run cp:proxy",
     "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
   },
   "dependencies": {
