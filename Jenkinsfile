@@ -1,7 +1,7 @@
 node {
   checkout scm
 
-  def aliDockerName = 'app--draft'
+  def aliDockerName = 'app-draft'
   def aliDockerRegistry = 'registry.cn-beijing.aliyuncs.com/o-w-o'
   def aliDockerVpcRegistry = 'registry-vpc.cn-beijing.aliyuncs.com/o-w-o'
   def aliDockerInnerRegistry = 'registry-internal.cn-beijing.aliyuncs.com/o-w-o'
