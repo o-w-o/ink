@@ -101,10 +101,10 @@ node {
     stage('Deploy') {
       echo "5. Deploy Stage"
 
-      withCredentials([sshUserPrivateKey(credentialsId: 'sshKey', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'username')]) {
+      withCredentials([sshUserPrivateKey(credentialsId: 'aliInkEcs', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'username')]) {
         def remote = [:]
         remote.name = "o-w-o"
-        remote.host = "o-w-o.ink"
+        remote.host = "draft.o-w-o.ink"
         remote.allowAnyHosts = true
         remote.user = username
         remote.identityFile = identity
