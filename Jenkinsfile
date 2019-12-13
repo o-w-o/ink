@@ -122,7 +122,7 @@ node {
 
         try {
           sshCommand remote: remote, command: "docker pull ${ioStore.dockerImageNameWithTag}"
-          sshCommand remote: remote, command: "docker run -i -d --net=host --name=${aliDockerName}' ${ioStore.dockerImageNameWithTag}"
+          sshCommand remote: remote, command: "docker run -i -d --net=host --name=${aliDockerName} ${ioStore.dockerImageNameWithTag}"
         } catch (e) {
           echo "部署异常 -> ${e.message}"
         } finally {
