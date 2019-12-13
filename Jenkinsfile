@@ -39,8 +39,11 @@ node {
 
           ioStore.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
 
-          ioStore.dockerImageName = "${aliDockerRegistry}/${aliDockerName}"
-          ioStore.dockerVpcImageName = "${aliDockerVpcRegistry}/${aliDockerName}"
+          ioStore.dockerImageNameUseNormal= "${aliDockerRegistry}/${aliDockerName}"
+          ioStore.dockerImageNameUseVpc  = "${aliDockerVpcRegistry}/${aliDockerName}"
+          ioStore.dockerImageNameUseInner = "${aliDockerInnerRegistry}/${aliDockerName}"
+
+          ioStore.dockerImageName = "${ioStore.dockerImageNameUseVpc}"
           ioStore.dockerImageNameWithTag = "${ioStore.dockerImageName}:${ioStore.dockerTag}"
 
         }
