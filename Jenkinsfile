@@ -95,6 +95,7 @@ node {
         ioStore.dockerImage = docker.build(ioStore.dockerImageName, "--build-arg DIST_DIR=${ioStore.dockerArgsDistDir} --build-arg PORT=${ioStore.dockerArgsPort} .")
 
         echo "4.4 发布 Image"
+        ioStore.dockerImage.push()
         ioStore.dockerImage.push("${ioStore.dockerTag}")
       }
     }

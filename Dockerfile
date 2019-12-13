@@ -17,6 +17,4 @@ RUN npm i -production
 EXPOSE ${PORT}
 
 # 启动容器时执行
-ENTRYPOINT npm run start
-
-
+ENTRYPOINT NODE_ENV=production npm run start

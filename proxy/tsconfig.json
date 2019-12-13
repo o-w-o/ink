@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "esnext",
-    "module": "system",
+    "module": "es6",
     "strict": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
