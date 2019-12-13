@@ -17,7 +17,7 @@
   "author": "symbols@dingtalk.com",
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^8.0.1",
+    "@hapi/boom": "^7.4.11",
     "@hapi/good": "^8.2.4",
     "@hapi/h2o2": "^8.3.2",
     "@hapi/hapi": "^18.4.0",
