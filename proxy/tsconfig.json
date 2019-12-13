@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "esnext",
-    "module": "es6",
+    "module": "commonjs",
     "strict": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,

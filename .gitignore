@@ -69,4 +69,7 @@ typings/
 # Idea
 .idea/
 
+# VS code
+.vscode/
+
 app/
