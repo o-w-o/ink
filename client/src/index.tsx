@@ -11,7 +11,9 @@ import { configureStore } from "./store";
 import * as serviceWorker from "./serviceWorker";
 
 if (process.env.NODE_ENV === "development") {
-  const { configureWhyDidYouRender } = require("./template/helper/why-did-u-render");
+  const {
+    configureWhyDidYouRender,
+  } = require("./template/helper/why-did-u-render");
   configureWhyDidYouRender(React, {});
 }
 

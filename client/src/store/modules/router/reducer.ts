@@ -10,10 +10,9 @@ export const defaultRouterStateRecordVal: IRouterState = {
   location: history.location,
 };
 
-export const RouterStateRecord: Record.Factory<IRouterState> = Record<IRouterState>(
-  defaultRouterStateRecordVal,
-  "[[DemoStateRecord]]"
-);
+export const RouterStateRecord: Record.Factory<IRouterState> = Record<
+  IRouterState
+>(defaultRouterStateRecordVal, "[[RouterStateRecord]]");
 
 export const routerReducer = connectRouter(history);
 

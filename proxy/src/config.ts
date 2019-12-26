@@ -4,8 +4,19 @@ export enum NodeEnvEnum {
   PRODUCTION = "production",
 }
 
-export const ENV = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : NodeEnvEnum.DEVELOPMENT;
+export const ENV = process.env.NODE_ENV
+  ? process.env.NODE_ENV.trim()
+  : NodeEnvEnum.DEVELOPMENT;
 
+/**
+ *
+ * 端口配置
+ * @export proxy 代理
+ * @export client 客户端
+ * @export server 服务端
+ *
+ * @interface IPortConfig
+ */
 export interface IPortConfig {
   client: {
     [key in NodeEnvEnum]: number;

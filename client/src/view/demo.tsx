@@ -3,12 +3,25 @@ import { createStructuredSelector, Selector } from "reselect";
 import { RecordOf } from "immutable";
 
 import { IPreloaderState } from "../store/reducers";
-import { $projects_, $user_, loading_, uuid_ } from "../store/modules/profile/selectors";
-import { fetchProfile } from "../store/modules/profile/actions";
 
-import { Demo, IDemoDispatchToProps, IDemoStateToProps } from "../template/modules/demo";
+import {
+  $projects_,
+  $user_,
+  loading_,
+  uuid_,
+} from "../store/modules/profile/selectors";
+import { fetchProfile } from "../store/modules/profile/epics";
 
-const mapStateToProps: Selector<RecordOf<IPreloaderState>, IDemoStateToProps> = createStructuredSelector({
+import {
+  Demo,
+  IDemoDispatchToProps,
+  IDemoStateToProps,
+} from "../template/modules/demo";
+
+const mapStateToProps: Selector<
+  RecordOf<IPreloaderState>,
+  IDemoStateToProps
+> = createStructuredSelector({
   uuid: uuid_,
   $projects: $projects_,
   $user: $user_,
@@ -19,7 +32,4 @@ const mapDispatchToProps: IDemoDispatchToProps = {
   fetchProfile,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Demo);
+export default connect(mapStateToProps, mapDispatchToProps)(Demo);

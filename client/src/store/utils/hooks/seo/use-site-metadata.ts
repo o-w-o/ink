@@ -10,7 +10,15 @@ export const useSiteMetadata = () => {
       author: "symbols@dingtalk.com",
     },
   });
-  const { siteTitle, siteTitleAlt, siteUrl, siteDescription, siteLanguage, siteImage, author } = siteMetadata;
+  const {
+    siteTitle,
+    siteTitleAlt,
+    siteUrl,
+    siteDescription,
+    siteLanguage,
+    siteImage,
+    author,
+  } = siteMetadata;
 
   return {
     siteTitle,

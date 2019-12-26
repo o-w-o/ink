@@ -4,10 +4,12 @@ const path = require("path");
 module.exports = {
   // The Webpack config to use when compiling your react app for development or production.
   webpack: function(_config_, env) {
-    console.debug("env ->", env);
+    // console.debug("env ->", env);
 
-    const config = _(process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer())(_config_, env);
-    console.debug("config ->", _config_);
+    const config = _(
+      process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer()
+    )(_config_, env);
+    // console.debug("config ->", _config_);
 
     return config;
   },
@@ -20,7 +22,9 @@ module.exports = {
       config.testPathIgnorePatterns = [];
     }
     if (!process.env.RUN_COMPONENT_TESTS) {
-      config.testPathIgnorePatterns.push("<rootDir>/src/components/**/*.test.js");
+      config.testPathIgnorePatterns.push(
+        "<rootDir>/src/components/**/*.test.js"
+      );
     }
     if (!process.env.RUN_REDUCER_TESTS) {
       config.testPathIgnorePatterns.push("<rootDir>/src/reducers/**/*.test.js");
@@ -55,7 +59,8 @@ module.exports = {
   },
   // The paths config to use when compiling your react app for development or production.
   paths: function(paths, env) {
-    console.debug("paths ->", paths);
+    // console.debug("paths ->", paths);
+
     return Object.assign(paths, {
       appBuild: path.join(__dirname, "../app/public"),
     });

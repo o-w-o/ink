@@ -1,5 +1,4 @@
 import React from "react";
-import { hidden } from "../styles/utils";
 
 const icons = {
   triangle: {
@@ -65,7 +64,14 @@ const icons = {
   },
 };
 
-type IconType = "triangle" | "circle" | "arrowUp" | "upDown" | "box" | "hexa" | "cross";
+type IconType =
+  | "triangle"
+  | "circle"
+  | "arrowUp"
+  | "upDown"
+  | "box"
+  | "hexa"
+  | "cross";
 
 type SVGProps = {
   stroke?: boolean;
@@ -82,7 +88,15 @@ const defaultProps = {
   hiddenMobile: false,
 };
 
-const SVG = ({ stroke, color, width, icon, left, top, hiddenMobile }: SVGProps) => (
+const SVG = ({
+  stroke,
+  color,
+  width,
+  icon,
+  left,
+  top,
+  hiddenMobile,
+}: SVGProps) => (
   <svg
     style={{
       position: `absolute`,

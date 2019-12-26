@@ -14,7 +14,16 @@ type DividerProps = {
   factor?: number;
 };
 
-export const Divider = ({ speed, offset, factor, bg, fill, clipPath, children, className }: DividerProps) => (
+export const Divider = ({
+  speed,
+  offset,
+  factor,
+  bg,
+  fill,
+  clipPath,
+  children,
+  className,
+}: DividerProps) => (
   <ParallaxLayer
     speed={speed}
     offset={offset}

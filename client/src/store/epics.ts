@@ -1,6 +1,8 @@
-import demoEpics from "./modules/profile/epics";
 import { combineEpics } from "redux-observable";
 
-const epics = [demoEpics];
+import { profileStore } from "./modules/profile";
+import { dbStore } from "./modules/db";
+
+const epics = [profileStore.epic, dbStore.epic];
 
 export default combineEpics(...epics);

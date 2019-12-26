@@ -26,6 +26,10 @@ export const UserRecord: Record.Factory<IUser> = Record<IUser>({
   id: "1",
   username: "",
   avatarUrl: "",
-  projects: [["11", "12"], ["11", "12"]],
-  quote: "程序员和上帝打赌要开发出更大更好——傻瓜都会用的软件。而上帝却总能创造出更大更傻的傻瓜。所以，上帝总能赢。",
+  projects: [
+    ["11", "12"],
+    ["11", "12"],
+  ],
+  quote:
+    "程序员和上帝打赌要开发出更大更好——傻瓜都会用的软件。而上帝却总能创造出更大更傻的傻瓜。所以，上帝总能赢。",
 });

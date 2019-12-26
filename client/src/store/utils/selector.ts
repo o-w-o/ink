@@ -1,4 +1,8 @@
-import { createSelectorCreator, defaultMemoize, createSelector as c } from "reselect";
+import {
+  createSelectorCreator,
+  defaultMemoize,
+  createSelector as c,
+} from "reselect";
 import { is, isImmutable } from "immutable";
 
 function immutableEqualityValidator(prevState: any, nextState: any) {
@@ -15,7 +19,11 @@ function immutableEqualityValidator(prevState: any, nextState: any) {
     return true;
   }
 
-  if (isImmutable(prevState) && isImmutable(nextState) && is(prevState, nextState)) {
+  if (
+    isImmutable(prevState) &&
+    isImmutable(nextState) &&
+    is(prevState, nextState)
+  ) {
     console.log("ImmutableEqualityValidator [hash] >> equal ?", true);
     return true;
   }
@@ -23,4 +31,7 @@ function immutableEqualityValidator(prevState: any, nextState: any) {
   return false;
 }
 
-export const createSelector: typeof c = createSelectorCreator(defaultMemoize, immutableEqualityValidator);
+export const createSelector: typeof c = createSelectorCreator(
+  defaultMemoize,
+  immutableEqualityValidator
+);

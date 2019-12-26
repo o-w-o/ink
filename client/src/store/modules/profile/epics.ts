@@ -1,3 +1,4 @@
+import { createAction } from "@reduxjs/toolkit";
 import { ActionsObservable, combineEpics, ofType } from "redux-observable";
 import { debounceTime, map, mergeMap, tap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
@@ -5,13 +6,15 @@ import { ajax } from "rxjs/ajax";
 import camelcaseKeys from "camelcase-keys";
 
 import { IReducerAction } from "../../reducers";
+import { setProfile, setProfileLoading } from "./store";
 
-import { FETCH_PROFILE } from "./constants";
-import { setProfile, setProfileLoading } from "./actions";
+export const fetchProfile = createAction("profile/fetch");
 
-export const fetchProfileEpics = (actions$: ActionsObservable<IReducerAction>) =>
+export const fetchProfileEpics = (
+  actions$: ActionsObservable<IReducerAction>
+) =>
   actions$.pipe(
-    ofType(FETCH_PROFILE),
+    ofType(fetchProfile.type),
     debounceTime(3000),
     mergeMap(({ payload }) =>
       ajax.getJSON(`https://gitlab.com/api/v4/users/1831024`).pipe(
@@ -27,14 +30,14 @@ export const fetchProfileEpics = (actions$: ActionsObservable<IReducerAction>) =
 
         mergeMap((responseUser) => [
           setProfile({
-            user: camelcaseKeys(responseUser),
+            user: camelcaseKeys(responseUser) as any,
             projects: camelcaseKeys({}),
           }),
-          setProfileLoading(false),
+          setProfileLoading({ loading: false }),
         ])
       )
     ),
     tap(console.info)
   );
 
-export default combineEpics(fetchProfileEpics);
+export const profileEpic = combineEpics(fetchProfileEpics);

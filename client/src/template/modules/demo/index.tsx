@@ -1,17 +1,21 @@
-import * as React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { Box, Button } from "@material-ui/core";
 import { ArrowForward } from "@material-ui/icons";
 
+import { IUserRecord } from "../../../domain/modules/demo/Demo";
+
 import { Parallax } from "react-spring/renderprops-addons.cjs";
 
-import { UserProfileCard } from "./components/UserProfileCard";
-import { IProfileState } from "../../../store/modules/profile/reducer";
 import { Box1 } from "../../components/Layout/boxes/Box1";
 import { Sample1 } from "../../components/Box/Sample";
+import { UserProfileCard } from "./components/UserProfileCard";
 
-export interface IDemoStateToProps extends IProfileState {}
+export interface IDemoStateToProps {
+  $user: IUserRecord;
+  loading: boolean;
+}
 
 export interface IDemoDispatchToProps {
   fetchProfile: () => any;
@@ -27,23 +31,21 @@ export class Demo extends React.Component<IDemoProps, never> {
         <Box1 offset={0}>
           <Sample1>
             <UserProfileCard
-                user={$user}
-                triggerSlot={
-                  <React.Fragment>
-                    <Button aria-label="settings" onClick={fetchProfile}>
-                      <Box mr={4}>FETCH</Box>
-                      <ArrowForward />
-                    </Button>
-                  </React.Fragment>
-                }
-                loading={loading}
+              user={$user}
+              triggerSlot={
+                <React.Fragment>
+                  <Button aria-label="settings" onClick={fetchProfile}>
+                    <Box mr={4}>FETCH</Box>
+                    <ArrowForward />
+                  </Button>
+                </React.Fragment>
+              }
+              loading={loading}
             />
           </Sample1>
           <Sample1>
             <Link to="/">
-              <Button>
-                返回主页
-              </Button>
+              <Button>返回主页</Button>
             </Link>
           </Sample1>
         </Box1>

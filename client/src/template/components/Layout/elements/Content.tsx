@@ -11,7 +11,13 @@ type ContentProps = {
   factor?: number;
 };
 
-const Content = ({ speed, offset, children, className, factor }: ContentProps) => (
+const Content = ({
+  speed,
+  offset,
+  children,
+  className,
+  factor,
+}: ContentProps) => (
   <ParallaxLayer
     className={className}
     speed={speed}
