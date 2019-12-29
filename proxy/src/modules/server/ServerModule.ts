@@ -1,5 +1,10 @@
 import * as Hapi from "@hapi/hapi";
-import { IProxy, IServerModule, IServerModuleOptions, IProxyOptions } from "../Proxy";
+import {
+  IProxy,
+  IServerModule,
+  IServerModuleOptions,
+  IProxyOptions,
+} from "../Proxy";
 import { proxyUri } from "../../utils/proxy";
 import { ENV, portConfig } from "../../config";
 

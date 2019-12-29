@@ -2,6 +2,7 @@ import * as Hapi from "@hapi/hapi";
 import * as Path from "path";
 import * as H2o2 from "@hapi/h2o2";
 import * as Inert from "@hapi/inert";
+import * as Nes from "@hapi/nes";
 import * as Logger from "hapi-pino";
 import { ENV, portConfig } from "../config";
 
@@ -17,6 +18,7 @@ export interface IProxyModule<T> {
 }
 
 export interface IProxyModuleOptions {
+  port?: string;
   baseUri?: string;
   namespace?: string;
 }
@@ -40,7 +42,7 @@ export const defaultProxyOptions: IProxyOptions = {
   },
 };
 
-console.log(portConfig.proxy, ENV)
+console.log(portConfig.proxy, ENV);
 
 export class Proxy {
   proxyServer: IProxy;
@@ -52,13 +54,19 @@ export class Proxy {
     this.options = Object.assign({}, defaultProxyOptions, options);
   }
 
-  registerClientModule(module: IClientModule, options?: Partial<IClientModuleOptions>): this {
+  registerClientModule(
+    module: IClientModule,
+    options?: Partial<IClientModuleOptions>
+  ): this {
     this.clientModule = module.registerOptions(options);
     this.registerOptions(module.extraOptions);
     return this;
   }
 
-  registerServerModule(module: IServerModule, options?: IServerModuleOptions): this {
+  registerServerModule(
+    module: IServerModule,
+    options?: IServerModuleOptions
+  ): this {
     this.serverModule = module.registerOptions(options);
     this.registerOptions(module.extraOptions);
     return this;
@@ -73,6 +81,7 @@ export class Proxy {
 
     await this.proxyServer.register(H2o2);
     await this.proxyServer.register(Inert);
+    await this.proxyServer.register(Nes);
 
     await this.proxyServer.register({
       plugin: Logger,
@@ -91,6 +100,12 @@ export class Proxy {
 
       return h.continue;
     });
+
+    setInterval(() => {
+      const msg = `xxx-${Math.floor(Math.random() * 1000)}`;
+      this.proxyServer.broadcast(msg);
+      console.log("msg", msg);
+    }, 1000);
 
     return this.proxyServer;
   }

@@ -1,4 +1,9 @@
-import { IClientModule, IClientModuleOptions, IProxy, IProxyOptions } from "../Proxy";
+import {
+  IClientModule,
+  IClientModuleOptions,
+  IProxy,
+  IProxyOptions,
+} from "../Proxy";
 import * as Hapi from "@hapi/hapi";
 import * as Path from "path";
 import { proxyType, proxyUri } from "../../utils/proxy";
@@ -7,6 +12,7 @@ import { ENV, NodeEnvEnum, portConfig } from "../../config";
 export class ClientModule implements IClientModule {
   static get defaultOptions(): IClientModuleOptions {
     return {
+      port: portConfig.client[ENV],
       baseUri: `http://localhost:${portConfig.client[ENV]}`,
       namespace: "",
       distDir: Path.join(__dirname, "../../public"),
@@ -17,9 +23,9 @@ export class ClientModule implements IClientModule {
   extraOptions: IProxyOptions = {
     routes: {
       files: {
-        relativeTo: Path.join(__dirname, '../../public')
-      }
-    }
+        relativeTo: Path.join(__dirname, "../../public"),
+      },
+    },
   };
 
   options: IClientModuleOptions;
@@ -41,7 +47,8 @@ export class ClientModule implements IClientModule {
             const { base, proxyPath, query } = proxyUri(req, options);
 
             const path =
-              (req.headers["accept"] || "").indexOf("text/html") < 0 || req.path.startsWith("/sockjs-node/")
+              (req.headers["accept"] || "").indexOf("text/html") < 0 ||
+              req.path.startsWith("/sockjs-node/")
                 ? proxyPath
                 : "/";
 

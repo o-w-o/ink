@@ -5,6 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "lint": "npx prettier --write src/**/*.ts",
     "build": "tsc",
     "start": "nodemon index.js",
     "dev:start": "nodemon --exec ts-node -- ./src/index.ts",

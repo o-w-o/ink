@@ -23,7 +23,8 @@ export const proxyUri = (req: Hapi.Request, options: IProxyModuleOptions) => {
 export const proxyType = (req: Hapi.Request) => {
   const { proxyPath } = req.params;
   const arr: string[] = proxyPath ? proxyPath.split(".") : [];
-  const type = Array.isArray(arr) && arr.length !== 1 ? arr[arr.length - 1] : null;
+  const type =
+    Array.isArray(arr) && arr.length !== 1 ? arr[arr.length - 1] : null;
   return {
     hasSuffix: !!type,
     type,

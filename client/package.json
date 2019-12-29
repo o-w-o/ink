@@ -16,6 +16,7 @@
     "connected-react-router": "^6.5.2",
     "customize-cra": "^1.0.0-alpha.0",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.20.0",
     "immutable": "^4.0.0-rc.12",
     "ix": "^2.5.3",
     "lodash": "^4.17.15",
@@ -66,6 +67,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:8084",
   "config-overrides-path": "react-app-config",
   "browserslist": {
     "production": [

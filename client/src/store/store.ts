@@ -7,6 +7,8 @@ import { history } from "./utils/history";
 import { dbHelper } from "./modules/db/lib";
 import { IPreloaderState } from "./reducers";
 import { triggerCacheStore } from "./modules/db/epics";
+import { socketHelper } from "./modules/socket/lib";
+import { triggerSocket } from "./modules/socket/epics";
 
 export const connectStore = (
   reducers: any,
@@ -46,18 +48,23 @@ export const connectStore = (
     });
   }
 
-  dbHelper.init().then(() => {
-    const epic$ = new BehaviorSubject(epics);
-    const rootEpic = (action$: any, state$: any): Observable<any> =>
-      merge(
-        dbHelper.$().pipe(map(triggerCacheStore)),
-        epic$.pipe(mergeMap((epic) => epic(action$, state$)))
-      );
+  const epic$ = new BehaviorSubject(epics);
 
-    epicMiddleware.run(rootEpic);
+  dbHelper.init().then(() => {
+    socketHelper.init().then(() => {
+      const rootEpic = (action$: any, state$: any): Observable<any> =>
+        merge(
+          socketHelper.$().pipe(map(triggerSocket)),
+          dbHelper.$().pipe(map(triggerCacheStore)),
+          epic$.pipe(mergeMap((epic) => epic(action$, state$)))
+        );
+
+      epicMiddleware.run(rootEpic);
+    });
   });
 
   dbHelper.$o(() => dbHelper.test());
+  socketHelper.$o(() => socketHelper.test());
 
   return store;
 };
