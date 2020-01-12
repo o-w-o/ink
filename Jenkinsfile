@@ -21,7 +21,7 @@ node {
   appImage.dockerRegistry = "${aliDockerVpcRegistry}"
 
   appImage.dockerArgsPort = "8084"
-  appImage.dockerArgsDistDir = 'app'
+  appImage.dockerArgsDistDir = 'dist'
 
   appImage.stashMark = "${appImage.imageName}-${appImage.dockerRegistry}"
   appImage.stashIncludeRegex = "**/${appImage.dockerArgsDistDir}/*"
