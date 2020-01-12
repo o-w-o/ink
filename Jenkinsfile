@@ -60,10 +60,6 @@ node {
     }
   }
 
-  stage('初始化报告') {
-    email
-  }
-
   stage('Prepare:Debug') {
     if (params.ENABLE_DEBUG) {
       input("构建版本号为【 ${appImage.dockerTag} 】, 镜像为【 ${appImage.dockerImageNameWithTag} 】确定吗？")
