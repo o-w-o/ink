@@ -23,7 +23,7 @@ node {
   appImage.dockerArgsPort = "8084"
   appImage.dockerArgsDistDir = 'dist'
 
-  appImage.stashMark = "${appImage.imageName}-${appImage.dockerRegistry}"
+  appImage.stashMark = "${appImage.imageName}-stash-mark"
   appImage.stashIncludeRegex = "**/${appImage.dockerArgsDistDir}/*"
 
 
