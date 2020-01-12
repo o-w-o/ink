@@ -14,8 +14,8 @@
     "script:npmrc": "node ./script/npmrc.js",
     "build:client": "cd ./client && npm ci && npm run build",
     "build:proxy": "cd ./proxy && npm ci && npm run build",
-    "cp:proxy": "cp ./proxy/package.json ./app",
-    "release:clean": "rimraf app && mkdir app",
+    "cp:proxy": "cp ./proxy/package.json ./dist",
+    "release:clean": "rimraf dist && mkdir dist",
     "release:debug": "npm run release:clean && npm run cp:proxy",
     "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
   },
