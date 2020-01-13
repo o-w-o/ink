@@ -37,7 +37,7 @@ node {
       subject: "构建开始 [ ${currentBuild.fullDisplayName} ]",
       body: """
       摘要：
-        - app: ${currentBuild.projectName}
+        - app: ${currentBuild.fullDisplayName}
         - branch: ${env.BRANCH_NAME}
       
       前往查看构建详情 ${env.BUILD_URL} 。
@@ -131,7 +131,7 @@ node {
              body: """
               部署预处理出现异常：
                 - message：${e.messag}
-                - app: ${currentBuild.projectName}
+                - app: ${currentBuild.fullDisplayName}
                 - branch: ${env.BRANCH_NAME}
                 - docker：${appImage.dockerImageNameWithTag}
               
@@ -152,7 +152,7 @@ node {
              body: """
               部署出现异常：
                 - message：${e.messag}
-                - app: ${currentBuild.projectName}
+                - app: ${currentBuild.fullDisplayName}
                 - branch: ${env.BRANCH_NAME}
                 - docker：${appImage.dockerImageNameWithTag}
               
@@ -172,7 +172,7 @@ node {
       subject: "构建结束 [ ${currentBuild.fullDisplayName} ]",
       body: """
       摘要：
-        - app: ${currentBuild.projectName}
+        - app: ${currentBuild.fullDisplayName}
         - branch: ${env.BRANCH_NAME}
         - docker：${appImage.dockerImageNameWithTag}
       
