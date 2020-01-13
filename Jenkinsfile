@@ -216,6 +216,7 @@ node {
         <li>docker：${appImage.dockerImageNameWithTag}<li>
       """
     )
+  }
 }
 
 
