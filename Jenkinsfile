@@ -1,3 +1,75 @@
+def notify(args) {
+  def type = args.type
+  def payload =  args.payload
+  def errorType =  args.errorType
+  def errorMessage =  args.errorMessage
+
+  def statusText = ''
+  def mode = 0
+
+  switch(type) {
+    case 'pre':
+      statusText = '构建开始'
+      mode = 1
+      break
+
+    case 'post': 
+      statusText = '构建结束'
+      mode = 1
+      break
+
+    case 'error': 
+      mode = -1
+
+      switch(errorType) {
+        case 'deploy:pre':
+          statusText = '部署预处理异常'
+          break
+        
+        case 'deploy':
+          statusText = '部署异常'
+          break
+        
+        default:
+          statusText = "未知错误异常[${errorType}]"
+        
+      }
+      break
+    
+    default:
+      statusText = "未知状态[${type}]"
+    
+  }
+
+  mail( 
+    mimeType: 'text/html',
+    to: 'postmaster@o-w-o.ink',
+    subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
+    body: """
+    <html>
+    <body>
+      <p>
+        系统邮件请勿回复。
+      </p>
+
+      <ul>
+        <strong>摘要：</strong>
+        <li>构建信息: ${currentBuild.fullDisplayName}</li>
+        <li>分支: ${env.BRANCH_NAME}</li>
+        <li>载荷: ${args} </li>
+      </ul>
+
+      ${mode != null ? "<hr><ul><strong style='color:red'>错误摘要：</strong>${errorMessage}</ul>" : ''}
+
+      ${payload != null ? "<hr><ul><strong>其它摘要：</strong>${payload}</ul>" : ''}
+
+      <a href="${env.RUN_DISPLAY_URL}">前往查看构建详情</a> 。
+    </body>
+    </html>
+    """
+  )
+}
+
 node {
   checkout scm
 
@@ -30,78 +102,6 @@ node {
 
   appImage.stashMark = "${appImage.imageName}--stash-mark"
   appImage.stashIncludeRegex = "**/${appImage.dockerArgsDistDir}/*"
-
-  def notify(args) {
-    def type = args.type
-    def payload =  args.payload
-    def errorType =  args.errorType
-    def errorMessage =  args.errorMessage
-
-    def statusText = ''
-    def mode = 0
-
-    switch(type) {
-      case 'pre':
-        statusText = '构建开始'
-        mode = 1
-        break
-
-      case 'post': 
-        statusText = '构建结束'
-        mode = 1
-        break
-
-      case 'error': 
-        mode = -1
-
-        switch(errorType) {
-          case 'deploy:pre':
-            statusText = '部署预处理异常'
-            break
-          
-          case 'deploy':
-            statusText = '部署异常'
-            break
-          
-          default:
-            statusText = "未知错误异常[${errorType}]"
-          
-        }
-        break
-      
-      default:
-        statusText = "未知状态[${type}]"
-      
-    }
-
-    mail( 
-      mimeType: 'text/html',
-      to: 'postmaster@o-w-o.ink',
-      subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
-      body: """
-      <html>
-      <body>
-        <p>
-          系统邮件请勿回复。
-        </p>
-
-        <ul>
-          <strong>摘要：</strong>
-          <li>构建信息: ${currentBuild.fullDisplayName}</li>
-          <li>分支: ${env.BRANCH_NAME}</li>
-          <li>载荷: ${args} </li>
-        </ul>
-
-        ${mode != null ? "<hr><ul><strong style='color:red'>错误摘要：</strong>${errorMessage}</ul>" : ''}
-
-        ${payload != null ? "<hr><ul><strong>其它摘要：</strong>${payload}</ul>" : ''}
-
-        <a href="${env.RUN_DISPLAY_URL}">前往查看构建详情</a> 。
-      </body>
-      </html>
-      """
-    )
-  }
 
 
   stage('notify:pre') {
