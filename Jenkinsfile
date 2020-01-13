@@ -20,15 +20,19 @@ node {
 
   appImage.dockerRegistry = "${aliDockerVpcRegistry}"
 
+  appImage.dockerImageNameUseNormal = "${aliDockerRegistry}/${appImage.imageName}"
+  appImage.dockerImageNameUseVpc = "${aliDockerVpcRegistry}/${appImage.imageName}"
+  appImage.dockerImageNameUseInner = "${aliDockerInnerRegistry}/${appImage.imageName}"
+  appImage.dockerImageName = "${appImage.dockerImageNameUseVpc}"
+
   appImage.dockerArgsPort = "8084"
   appImage.dockerArgsDistDir = 'dist'
 
-  appImage.stashMark = "${appImage.imageName}-stash-mark"
+  appImage.stashMark = "${appImage.imageName}--stash-mark"
   appImage.stashIncludeRegex = "**/${appImage.dockerArgsDistDir}/*"
 
 
-  stage('初始化') {
-
+  stage('setup:global') {
     docker.withRegistry(appBuilderContainer.dockerRegistry, appBuilderContainer.dockerRegistryCredentialId) {
       docker.image(appBuilderContainer.imageName).inside(appBuilderContainer.imageRunParams) {
         echo "1 初始化全局配置"
@@ -50,23 +54,25 @@ node {
         appImage.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()
         appImage.dockerTag = sh(returnStdout: true, script: "node ./script/version.js").trim().toLowerCase()
 
-        appImage.dockerImageNameUseNormal = "${aliDockerRegistry}/${appImage.imageName}"
-        appImage.dockerImageNameUseVpc = "${aliDockerVpcRegistry}/${appImage.imageName}"
-        appImage.dockerImageNameUseInner = "${aliDockerInnerRegistry}/${appImage.imageName}"
-
-        appImage.dockerImageName = "${appImage.dockerImageNameUseVpc}"
         appImage.dockerImageNameWithTag = "${appImage.dockerImageName}:${appImage.dockerTag}"
       }
     }
   }
 
-  stage('Prepare:Debug') {
-    if (params.ENABLE_DEBUG) {
-      input("构建版本号为【 ${appImage.dockerTag} 】, 镜像为【 ${appImage.dockerImageNameWithTag} 】确定吗？")
+  stage('setup:debug') {
+    if(env.BRANCH_NAME != 'master'){
+      echo """debug:
+              构建版本号为 [${appImage.dockerTag}], 
+              镜像为[${appImage.dockerImageNameWithTag}]
+           """
     }
   }
 
-  stage('Build') {
+  stage('test') {
+    echo 'Hi !'
+  }
+
+  stage('build:dist') {
     docker.image(appBuilderContainer.imageName).inside(appBuilderContainer.imageRunParams) {
       echo "2 Build Docker Image Stage"
 
@@ -78,35 +84,23 @@ node {
     }
   }
 
-  stage('Test') {
-    echo '3.Test Stage'
-  }
-
-  stage('Push') {
-    echo "4.Push Docker Image Stage"
-
-    docker.withRegistry("https://${aliDockerVpcRegistry}", 'aliDockerRegistry') {
-      echo "4.1 获取 打包文件"
+  stage('build:docker') {
+    docker.withRegistry(appBuilderContainer.dockerRegistry, appBuilderContainer.dockerRegistryCredentialId) {
+      echo "1.1 获取 打包文件"
       unstash("${appImage.stashMark}")
 
-      echo "4.2 预检 Workspace"
+      echo "1.2 预检 Workspace"
       sh "ls -al"
 
-      if (params.ENABLE_DEBUG) {
-        input("是否继续进行下一步？")
-      }
-
-      echo "4.3 构建 Image"
+      echo "1.3 构建 Image"
       appImage.dockerImage = docker.build(appImage.dockerImageName, "--build-arg DIST_DIR=${appImage.dockerArgsDistDir} --build-arg PORT=${appImage.dockerArgsPort} .")
 
-      echo "4.4 发布 Image"
+      echo "1.4 发布 Image"
       appImage.dockerImage.push()
       appImage.dockerImage.push("${appImage.dockerTag}")
     }
   }
-  stage('Deploy') {
-    echo "5. Deploy Stage"
-
+  stage('deploy') {
     withCredentials([sshUserPrivateKey(credentialsId: 'aliInkEcs', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'username')]) {
       def remote = [:]
       remote.name = "o-w-o"
@@ -119,7 +113,18 @@ node {
         sshCommand remote: remote, command: "docker stop ${appImage.imageName}"
         sshCommand remote: remote, command: "docker rm ${appImage.imageName}"
       } catch (e) {
-        echo "部署预处理异常 -> ${e.message}"
+        mail to: 'postmaster@o-w-o.ink',
+             subject: "部署预处理异常 [ ${currentBuild.fullDisplayName} ]",
+             body: """
+              部署预处理出现异常：
+                - message：${e.messag}
+                - app: ${currentBuild.projectName}
+                - branch: ${env.BRANCH_NAME}
+                - docker：${appImage.dockerImageNameWithTag}
+              
+              请前往处理 ${env.BUILD_URL} 。
+            """
+
         input("部署预处理出现异常，确认继续执行 【${appImage.dockerImageNameWithTag}】 部署行为？")
       } finally {
         echo "${appImage.dockerImageNameWithTag}"
@@ -129,7 +134,19 @@ node {
         sshCommand remote: remote, command: "docker pull ${appImage.dockerImageNameWithTag}"
         sshCommand remote: remote, command: "docker run -i -d --net=host --name=${appImage.imageName} ${appImage.dockerImageNameWithTag}"
       } catch (e) {
-        echo "部署异常 -> ${e.message}"
+        mail to: 'postmaster@o-w-o.ink',
+             subject: "部署异常 [ ${currentBuild.fullDisplayName} ]",
+             body: """
+              部署出现异常：
+                - message：${e.messag}
+                - app: ${currentBuild.projectName}
+                - branch: ${env.BRANCH_NAME}
+                - docker：${appImage.dockerImageNameWithTag}
+              
+              请前往处理 ${env.BUILD_URL} 。
+            """
+
+        input("部署出现异常，确认继续执行 【${appImage.dockerImageNameWithTag}】 部署行为？")
       } finally {
         echo "部署检测"
         sshCommand remote: remote, command: "docker ps"
