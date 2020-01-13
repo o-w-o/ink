@@ -32,6 +32,18 @@ node {
   appImage.stashIncludeRegex = "**/${appImage.dockerArgsDistDir}/*"
 
 
+  stage('notify:pre') {
+    mail to: 'postmaster@o-w-o.ink',
+      subject: "构建开始 [ ${currentBuild.fullDisplayName} ]",
+      body: """
+      摘要：
+        - app: ${currentBuild.projectName}
+        - branch: ${env.BRANCH_NAME}
+      
+      前往查看构建详情 ${env.BUILD_URL} 。
+    """
+  }
+
   stage('setup:global') {
     docker.withRegistry(appBuilderContainer.dockerRegistry, appBuilderContainer.dockerRegistryCredentialId) {
       docker.image(appBuilderContainer.imageName).inside(appBuilderContainer.imageRunParams) {
@@ -100,6 +112,7 @@ node {
       appImage.dockerImage.push("${appImage.dockerTag}")
     }
   }
+
   stage('deploy') {
     withCredentials([sshUserPrivateKey(credentialsId: 'aliInkEcs', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'username')]) {
       def remote = [:]
@@ -152,6 +165,19 @@ node {
         sshCommand remote: remote, command: "docker ps"
       }
     }
+  }
+
+  stage('notify:post') {
+    mail to: 'postmaster@o-w-o.ink',
+      subject: "构建结束 [ ${currentBuild.fullDisplayName} ]",
+      body: """
+      摘要：
+        - app: ${currentBuild.projectName}
+        - branch: ${env.BRANCH_NAME}
+        - docker：${appImage.dockerImageNameWithTag}
+      
+      前往查看构建详情 ${env.BUILD_URL} 。
+    """
   }
 }
 
