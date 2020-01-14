@@ -10,7 +10,7 @@ const sampleStyle: CSSObject = {
 };
 
 export const Sample1: React.SFC = ({ children }) => (
-  <Box style={{ width: "81%", margin: "64px auto", padding: "24px" }}>
+  <Box style={{ maxWidth: "81%", margin: "64px auto" }}>
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <Paper css={sampleStyle}>{children}</Paper>

@@ -1,4 +1,4 @@
-const { override: _, addBundleVisualizer } = require("customize-cra");
+const { override: _, addBundleVisualizer, addPostcssPlugins } = require("customize-cra");
 const path = require("path");
 
 module.exports = {
@@ -7,11 +7,22 @@ module.exports = {
     // console.debug("env ->", env);
 
     const config = _(
-      process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer()
+      process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer(),
+      addPostcssPlugins(
+        [
+          require("postcss-preset-env")({
+            stage: 2,
+            features: {
+              "nesting-rules": true
+            },
+            browsers: "last 2 versions"
+          })
+        ]
+      )
     )(_config_, env);
-    // console.debug("config ->", _config_);
-
-    return config;
+    // console.log("config ->", config);
+    
+    return config
   },
   // The Jest config to use when running your jest tests - note that the normal rewires do not
   // work here.

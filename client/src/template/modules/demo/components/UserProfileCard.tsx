@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
+import "./UserProfileCard.css";
+
 import { IUserRecord } from "../../../../domain/modules/demo/Demo";
 import { ProxyTester } from "../../../components/ProxyTester";
 
@@ -37,7 +39,7 @@ export const UserProfileCard = React.memo<IProps>(
     );
 
     return (
-      <Box padding={4} textAlign="left">
+      <Box p={{ xs: 1, sm: 3, md: 5 }} textAlign="left" className="t">
         <If condition={!loading}>
           <Then>
             <Card>

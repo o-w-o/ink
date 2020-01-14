@@ -34,6 +34,7 @@ export class Demo extends React.Component<IDemoProps, never> {
               user={$user}
               triggerSlot={
                 <React.Fragment>
+                  <br />
                   <Button aria-label="settings" onClick={fetchProfile}>
                     <Box mr={4}>FETCH</Box>
                     <ArrowForward />

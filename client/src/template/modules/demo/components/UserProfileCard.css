@@ -1,0 +1,11 @@
+@media(width < 720px) {
+  .t {
+    & .MuiCardHeader-avatar {
+      display: none;
+    }
+    &.MuiBox-root {
+      background: rebeccapurple;
+    }
+  } 
+}
+

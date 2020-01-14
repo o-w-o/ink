@@ -41,7 +41,7 @@ export const connectStore = (
     composeEnhancers(applyMiddleware(...middleware), ...enhancers)
   );
 
-  const m = module as any;
+  const m = module;
   if (m.hot) {
     m.hot.accept("./reducers", () => {
       store.replaceReducer(reducers);
