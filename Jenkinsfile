@@ -5,7 +5,67 @@ def notify(args) {
   def errorMessage =  args.errorMessage
 
   def statusText = ''
+  def summaryItems = []
   def mode = 0
+
+  def gTpl = { slot ->
+    return """
+      <html>
+        <body>
+          <style> .Box { background-color: #fff; border: 1px solid #d1d5da; border-radius: 3px } .Box-header { padding: 16px; margin: -1px -1px 0 -1px; background-color: #f6f8fa; border-color: #d1d5da; border-style: solid; border-width: 1px; border-top-left-radius: 3px; border-top-right-radius: 3px } .Box-title { font-size: 14px; font-weight: 600 } .Box-body { padding: 16px; border-bottom: 1px solid #e1e4e8 } .Box-body:last-of-type { margin-bottom: -1px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px } .Box-row { padding: 16px; margin-top: -1px; list-style-type: none; border-top: 1px solid #e1e4e8 } .Box-row:first-of-type { border-top-color: transparent; border-top-left-radius: 2px; border-top-right-radius: 2px } .Box-row:last-of-type { border-bottom-right-radius: 2px; border-bottom-left-radius: 2px } .Box-row.Box-row--unread,    .Box-row.unread { box-shadow: 2px 0 0 #0366d6 inset } .Box-footer { padding: 16px; margin-top: -1px; border-top: 1px solid #e1e4e8 } .Box--scrollable { max-height: 324px; overflow: scroll } .Box--danger { border-color: #d73a49 } .Box--danger .Box-row:first-of-type { border-color: #d73a49 } .Box--danger .Box-body:last-of-type { border-color: #d73a49 } .Box-row--blue { background-color: #dbedff; color: #032f62 } .Box-row--red { background-color: #ffdce0; color: #86181d } .Box-row--orange { background-color: #735c0f; color: #fffbdd } .Box-row--green { background-color: #165c26; color: #dcffe4 } .Box-row--gray { background-color: #f6f8fa }</style>
+          <p>
+            系统邮件请勿回复。
+          </p>
+
+          ${slot}
+        </body>
+        </html>
+      """
+  }
+
+  def gSlot = { rows ->
+    def rowText = ''
+    def rowMode = 1
+    
+    for(row in rows) {
+      switch(row.type) {
+        case "error":
+         rowMode = -1
+          rowText += "<div class='Box-row Box-row--red'> ${row.content} </div>"
+          break
+        case "info":
+          rowText += "<div class='Box-row Box-row--blue'> ${row.content} </div>"
+          break
+        case "success":
+          rowText += "<div class='Box-row Box-row--green'> ${row.content} </div>"
+          break
+        case "warn":
+          rowText += "<div class='Box-row Box-row--orange'> ${row.content} </div>"
+          break
+        default:
+          rowText += "<div class='Box-row'> ${row.content} </div>"
+      }
+    }
+
+    return """
+            <div class="Box ${rowMode == -1 ? 'Box--danger' : ''}">
+              <div class="Box-header">
+                <h3 class="Box-title">
+                  摘要
+                </h3>
+              </div>
+              <div class="Box-body">
+                构建信息：${currentBuild.fullDisplayName}
+              </div>
+              ${rowText}
+              <div class="Box-footer">
+                <a href="${env.RUN_DISPLAY_URL}">前往查看构建详情</a>
+              </div>
+            </div>
+          """
+  }
+
+  summaryItems.push([content: "分支: ${env.BRANCH_NAME}"])
 
   switch(type) {
     case 'pre':
@@ -19,7 +79,7 @@ def notify(args) {
       break
 
     case 'error': 
-      mode = -1
+      summaryItems.push([type: 'error', content: "异常信息：${errorMessage}"])
 
       switch(errorType) {
         case 'deploy:pre':
@@ -32,41 +92,24 @@ def notify(args) {
         
         default:
           statusText = "未知错误异常[${errorType}]"
-        
       }
+
+
       break
     
     default:
       statusText = "未知状态[${type}]"
-    
+  }
+
+  if(payload != null) {
+    summaryItems.push([type: 'info', content: "摘要：${payload}"])
   }
 
   mail( 
     mimeType: 'text/html',
     to: 'postmaster@o-w-o.ink',
     subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
-    body: """
-    <html>
-    <body>
-      <p>
-        系统邮件请勿回复。
-      </p>
-
-      <ul>
-        <strong>摘要：</strong>
-        <li>构建信息: ${currentBuild.fullDisplayName}</li>
-        <li>分支: ${env.BRANCH_NAME}</li>
-        <li>载荷: ${args} </li>
-      </ul>
-
-      ${mode != null ? "<hr><ul><strong style='color:red'>错误摘要：</strong>${errorMessage}</ul>" : ''}
-
-      ${payload != null ? "<hr><ul><strong>其它摘要：</strong>${payload}</ul>" : ''}
-
-      <a href="${env.RUN_DISPLAY_URL}">前往查看构建详情</a> 。
-    </body>
-    </html>
-    """
+    body: "${gTpl.call(gSlot.call(summaryItems))}"
   )
 }
 
