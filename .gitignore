@@ -72,4 +72,4 @@ typings/
 # VS code
 .vscode/
 
-app/
+dist/

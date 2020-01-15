@@ -121,12 +121,10 @@ def notifyJira(args) {
 
   switch(type) {
     case 'build':
-      withEnv(["BUILD_DISPLAY_NAME = ${${envType}-${gitBranch}-${env.BUILD_NUMBER}}"]) {
-        jiraSendBuildInfo(
-          branch: gitBranch,
-          site: jiraSite
-        )
-      }
+      jiraSendBuildInfo(
+        branch: gitBranch,
+        site: jiraSite
+      )
       break;
     case 'deploy':
       switch(envType) {
@@ -157,7 +155,7 @@ node {
   appBuilderContainer.dockerRegistryCredentialId = "aliDockerRegistry"
   appBuilderContainer.dockerRegistry = "https://${aliDockerVpcRegistry}"
 
-  appBuilderContainer.imageName = "${aliDockerVpcRegistry}/app-starter"
+  appBuilderContainer.imageName = "${aliDockerVpcRegistry}/app-builder"
   appBuilderContainer.imageRunParams = """-u root \
     -v /var/npm/v10/node_global_modules:/root/.node_global_modules \
     -v /var/npm/v10/node_modules:/root/.node_modules
@@ -182,6 +180,7 @@ node {
 
   stage('notify:pre') {
     notify(type: 'pre')
+    notifyJira(type: 'build')
   }
 
   stage('setup:global') {
@@ -251,10 +250,6 @@ node {
       appImage.dockerImage.push()
       appImage.dockerImage.push("${appImage.dockerTag}")
     }
-  }
-
-  stage('build:post') {
-    notifyJira(type: 'build')
   }
 
   stage('deploy') {
