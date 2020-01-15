@@ -26,4 +26,5 @@ console.log("[TEST] jira.[Smart Commits]");
  *  - comment
  *  - time
  *  - transition
+ *    - TEST 3: INK-23 #in-progress #comment 第 3 次尝试
  */
