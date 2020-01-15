@@ -27,5 +27,7 @@ console.log("[TEST] jira.[Smart Commits]");
  *  - time
  *  - transition
  *    - TEST 3: INK-23 #in-progress #comment 第 3 次尝试 (OK)
- *    - TEST 4: INK-23 #to-do #comment 第 4 次尝试 (PENDING)
+ *    - TEST 4: INK-23 #to-do #comment 第 4 次尝试 (OK)
+ *    - TEST 4: INK-23 #in-progress #comment 第 5 次尝试 (PENDING)
+ *    - TEST 4: INK-22 #done #time 3h 30m #comment 第 5 次尝试 (PENDING)
  */
