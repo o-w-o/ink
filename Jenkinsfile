@@ -133,8 +133,8 @@ def notifyJira(args) {
         case 'stagging':
         case 'production':
           jiraSendDeploymentInfo(
-            environmentId: 'draft-test-1',
-            environmentName: envType,
+            environmentId: "${envType}-${gitBranch}-${env.BUILD_NUMBER}",
+            environmentName: '开发环境',
             environmentType: envType,
             site: jiraSite
           )
