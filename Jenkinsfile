@@ -113,6 +113,37 @@ def notify(args) {
   )
 }
 
+def notifyJira(args) {
+  def type = args.type
+  def envType = args.envType
+  def jiraSite = 'o-w-o.atlassian.net'
+  def gitBranch = "${env.BRANCH_NAME}"
+
+  switch(type) {
+    case 'build':
+      jiraSendBuildInfo(
+        branch: gitBranch,
+        site: jiraSite
+      )
+      break;
+    case 'deploy':
+      switch(envType) {
+        case 'development':
+        case 'testing':
+        case 'stagging':
+        case 'production':
+          jiraSendDeploymentInfo(
+            environmentId: 'draft-test-1',
+            environmentName: envType,
+            environmentType: envType,
+            site: jiraSite
+          )
+          break
+      }
+      break;
+  }
+}
+
 node {
   checkout scm
 
@@ -149,6 +180,7 @@ node {
 
   stage('notify:pre') {
     notify(type: 'pre')
+    notifyJira(type: 'build')
   }
 
   stage('setup:global') {
@@ -259,6 +291,8 @@ node {
         <li>docker：${appImage.dockerImageNameWithTag}<li>
       """
     )
+    
+    notifyJira(type: 'deploy', envType: 'development')
   }
 }
 

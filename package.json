@@ -22,7 +22,6 @@
   "dependencies": {
     "execa": "^3.4.0",
     "inquirer": "^7.0.0",
-    "postcss-preset-env": "^6.7.0",
     "registry-auth-token": "^4.0.0",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.4",
@@ -46,10 +45,7 @@
     "husky": "^3.1.0",
     "lerna": "^3.19.0",
     "lint-staged": "^9.5.0",
-    "postcss-cssnext": "^3.1.0",
     "prettier": "^1.19.1",
-    "react-app-rewire-postcss": "^3.0.2",
-    "react-app-rewired": "^2.1.5",
     "semver": "^6.3.0"
   },
   "husky": {
