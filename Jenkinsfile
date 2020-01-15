@@ -121,10 +121,12 @@ def notifyJira(args) {
 
   switch(type) {
     case 'build':
-      jiraSendBuildInfo(
-        branch: gitBranch,
-        site: jiraSite
-      )
+      withEnv(["BUILD_DISPLAY_NAME = ${${envType}-${gitBranch}-${env.BUILD_NUMBER}}"]) {
+        jiraSendBuildInfo(
+          branch: gitBranch,
+          site: jiraSite
+        )
+      }
       break;
     case 'deploy':
       switch(envType) {
@@ -180,7 +182,6 @@ node {
 
   stage('notify:pre') {
     notify(type: 'pre')
-    notifyJira(type: 'build')
   }
 
   stage('setup:global') {
@@ -250,6 +251,10 @@ node {
       appImage.dockerImage.push()
       appImage.dockerImage.push("${appImage.dockerTag}")
     }
+  }
+
+  stage('build:post') {
+    notifyJira(type: 'build')
   }
 
   stage('deploy') {
