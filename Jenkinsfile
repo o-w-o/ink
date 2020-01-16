@@ -145,10 +145,6 @@ def notifyJira(args) {
 }
 
 properties([
-    [$class: 'GithubProjectProperty', displayName: 'INK', projectUrlStr: 'https://github.com/o-w-o/ink-draft/']
-])
-
-properties([
     [$class: 'GithubProjectProperty', displayName: 'INK', projectUrlStr: 'https://github.com/o-w-o/ink-draft/'],
     buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')),
     pipelineTriggers([
