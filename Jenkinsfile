@@ -144,6 +144,24 @@ def notifyJira(args) {
   }
 }
 
+properties([
+    pipelineTriggers([
+        [$class: 'GenericTrigger',
+         genericVariables: [
+             [key: 'ref', value: '$.ref'],
+         ],
+
+         causeString: 'Triggered on $ref',
+
+         printContributedVariables: true,
+         printPostContent: true,
+
+         regexpFilterText: '$ref',
+         regexpFilterExpression: "refs/heads/${BRANCH_NAME}"
+        ]
+    ])
+])
+
 node {
   checkout scm
 
