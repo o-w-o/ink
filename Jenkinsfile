@@ -144,15 +144,7 @@ def notifyJira(args) {
   }
 }
 
-properties([
-    [$class: 'GithubProjectProperty', displayName: 'INK', projectUrlStr: 'https://github.com/o-w-o/ink-draft/'],
-    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '3')),
-    pipelineTriggers([
-        githubBranches(cancelQueued: true, events: [branchCreated(), commit([])], preStatus: true, skipFirstRun: true, spec: 'H/5 * * * *', triggerMode: 'HEAVY_HOOKS'),
-        githubPullRequests(abortRunning: true, branchRestriction: [targetBranch: '''draft master'''], cancelQueued: true, events: [Open()], preStatus: true, skipFirstRun: true, spec: 'H/3 * * * *', triggerMode: 'HEAVY_HOOKS'),
-        githubPush()
-    ])
-])
+properties([pipelineTriggers([githubBranches(cancelQueued: true, events: [branchCreated(), commit([])], preStatus: true, repoProviders: [githubPlugin(repoPermission: 'PUSH')], skipFirstRun: true, spec: 'H/5 * * * *', triggerMode: 'HEAVY_HOOKS'), githubPullRequests(abortRunning: true, branchRestriction: [targetBranch: 'draft master'], cancelQueued: true, events: [Open()], preStatus: true, repoProviders: [githubPlugin(repoPermission: 'PUSH')], skipFirstRun: true, spec: 'H/3 * * * *', triggerMode: 'HEAVY_HOOKS')])])
 
 node {
   checkout scm
