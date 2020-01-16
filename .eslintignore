@@ -1,0 +1,10 @@
+# Created by .ignore support plugin ()
+### Ignore
+
+# IntelliJ project files
+.idea
+typings/**
+
+
+coverage
+build

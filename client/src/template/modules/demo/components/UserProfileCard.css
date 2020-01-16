@@ -1,0 +1,15 @@
+@media(width < 720px) {
+  .t {
+    & .MuiCardHeader-avatar {
+      display: none;
+    }
+    & .MuiButton-label {
+      color: bisque;
+    }
+    &.MuiBox-root {
+      color: bisque;
+      background: rebeccapurple;
+    }
+  } 
+}
+
