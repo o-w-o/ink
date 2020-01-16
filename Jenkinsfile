@@ -26,7 +26,7 @@ def notify(args) {
   def gSlot = { rows ->
     def rowText = ''
     def rowMode = 1
-    
+
     for(row in rows) {
       switch(row.type) {
         case "error":
@@ -73,30 +73,30 @@ def notify(args) {
       mode = 1
       break
 
-    case 'post': 
+    case 'post':
       statusText = '构建结束'
       mode = 1
       break
 
-    case 'error': 
+    case 'error':
       summaryItems.push([type: 'error', content: "异常信息：${errorMessage}"])
 
       switch(errorType) {
         case 'deploy:pre':
           statusText = '部署预处理异常'
           break
-        
+
         case 'deploy':
           statusText = '部署异常'
           break
-        
+
         default:
           statusText = "未知错误异常[${errorType}]"
       }
 
 
       break
-    
+
     default:
       statusText = "未知状态[${type}]"
   }
@@ -105,7 +105,7 @@ def notify(args) {
     summaryItems.push([type: 'info', content: "摘要：${payload}"])
   }
 
-  mail( 
+  mail(
     mimeType: 'text/html',
     to: 'postmaster@o-w-o.ink',
     subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
@@ -145,6 +145,8 @@ def notifyJira(args) {
 }
 
 node {
+  properties([pipelineTriggers([githubPush()])])
+
   checkout scm
 
   def aliDockerRegistry = 'registry.cn-beijing.aliyuncs.com/o-w-o'
@@ -191,7 +193,7 @@ node {
 
         echo "1.1 检验 npm 版本"
         sh "npm -v"
-        
+
         echo "1.2 设置 npm 国内安装源"
         sh "npm config set registry https://registry.npm.taobao.org"
 
@@ -286,12 +288,12 @@ node {
 
   stage('notify:post') {
     notify(
-      type: 'post', 
+      type: 'post',
       payload: """
         <li>docker：${appImage.dockerImageNameWithTag}<li>
       """
     )
-    
+
     notifyJira(type: 'deploy', envType: 'development')
   }
 }
