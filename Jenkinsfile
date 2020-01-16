@@ -106,10 +106,10 @@ def notify(args) {
   }
 
   mail(
-      mimeType: 'text/html',
-      to: 'postmaster@o-w-o.ink',
-      subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
-      body: "${gTpl.call(gSlot.call(summaryItems))}"
+    mimeType: 'text/html',
+    to: 'postmaster@o-w-o.ink',
+    subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
+    body: "${gTpl.call(gSlot.call(summaryItems))}"
   )
 }
 
@@ -122,8 +122,8 @@ def notifyJira(args) {
   switch (type) {
     case 'build':
       jiraSendBuildInfo(
-          branch: gitBranch,
-          site: jiraSite
+        branch: gitBranch,
+        site: jiraSite
       )
       break;
     case 'deploy':
@@ -133,10 +133,10 @@ def notifyJira(args) {
         case 'stagging':
         case 'production':
           jiraSendDeploymentInfo(
-              environmentId: "${envType}-${gitBranch}-${env.BUILD_NUMBER}",
-              environmentName: '开发环境',
-              environmentType: envType,
-              site: jiraSite
+            environmentId: "${envType}-${gitBranch}-${env.BUILD_NUMBER}",
+            environmentName: '开发环境',
+            environmentType: envType,
+            site: jiraSite
           )
           break
       }
@@ -144,23 +144,28 @@ def notifyJira(args) {
   }
 }
 
-properties([
+withCredentials([string(credentialsId: 'genericTriggerTokenId', variable: 'genericTriggerToken')]) {
+  properties([
     pipelineTriggers([
-        [$class: 'GenericTrigger',
-         genericVariables: [
-             [key: 'ref', value: '$.ref'],
+      [$class                   : 'GenericTrigger',
+       genericVariables         : [
+         [
+           key  : 'ref',
+           value: '$.ref'
          ],
+       ],
 
-         causeString: 'Triggered on $ref',
+       causeString              : 'Triggered on $ref',
 
-         printContributedVariables: true,
-         printPostContent: true,
-
-         regexpFilterText: '$ref',
-         regexpFilterExpression: "refs/heads/${BRANCH_NAME}"
-        ]
+       printContributedVariables: true,
+       printPostContent         : true,
+       token                    : genericTriggerToken,
+       regexpFilterText         : '$ref',
+       regexpFilterExpression   : "refs/heads/${BRANCH_NAME}"
+      ]
     ])
-])
+  ])
+}
 
 node {
   checkout scm
@@ -304,8 +309,8 @@ node {
 
   stage('notify:post') {
     notify(
-        type: 'post',
-        payload: """
+      type: 'post',
+      payload: """
         <li>docker：${appImage.dockerImageNameWithTag}<li>
       """
     )
