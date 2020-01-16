@@ -144,9 +144,9 @@ def notifyJira(args) {
   }
 }
 
-node {
-  properties([pipelineTriggers([$class: "GitHubPushTrigger"])])
+properties([pipelineTriggers([githubPush()])])
 
+node {
   checkout scm
 
   def aliDockerRegistry = 'registry.cn-beijing.aliyuncs.com/o-w-o'
