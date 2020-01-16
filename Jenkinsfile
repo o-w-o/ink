@@ -1,8 +1,8 @@
 def notify(args) {
   def type = args.type
-  def payload =  args.payload
-  def errorType =  args.errorType
-  def errorMessage =  args.errorMessage
+  def payload = args.payload
+  def errorType = args.errorType
+  def errorMessage = args.errorMessage
 
   def statusText = ''
   def summaryItems = []
@@ -27,10 +27,10 @@ def notify(args) {
     def rowText = ''
     def rowMode = 1
 
-    for(row in rows) {
-      switch(row.type) {
+    for (row in rows) {
+      switch (row.type) {
         case "error":
-         rowMode = -1
+          rowMode = -1
           rowText += "<div class='Box-row Box-row--red'> ${row.content} </div>"
           break
         case "info":
@@ -67,7 +67,7 @@ def notify(args) {
 
   summaryItems.push([content: "分支: ${env.BRANCH_NAME}"])
 
-  switch(type) {
+  switch (type) {
     case 'pre':
       statusText = '构建开始'
       mode = 1
@@ -81,7 +81,7 @@ def notify(args) {
     case 'error':
       summaryItems.push([type: 'error', content: "异常信息：${errorMessage}"])
 
-      switch(errorType) {
+      switch (errorType) {
         case 'deploy:pre':
           statusText = '部署预处理异常'
           break
@@ -101,15 +101,15 @@ def notify(args) {
       statusText = "未知状态[${type}]"
   }
 
-  if(payload != null) {
+  if (payload != null) {
     summaryItems.push([type: 'info', content: "摘要：${payload}"])
   }
 
   mail(
-    mimeType: 'text/html',
-    to: 'postmaster@o-w-o.ink',
-    subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
-    body: "${gTpl.call(gSlot.call(summaryItems))}"
+      mimeType: 'text/html',
+      to: 'postmaster@o-w-o.ink',
+      subject: "${statusText} [ ${currentBuild.fullDisplayName} ]",
+      body: "${gTpl.call(gSlot.call(summaryItems))}"
   )
 }
 
@@ -119,30 +119,34 @@ def notifyJira(args) {
   def jiraSite = 'o-w-o.atlassian.net'
   def gitBranch = "${env.BRANCH_NAME}"
 
-  switch(type) {
+  switch (type) {
     case 'build':
       jiraSendBuildInfo(
-        branch: gitBranch,
-        site: jiraSite
+          branch: gitBranch,
+          site: jiraSite
       )
       break;
     case 'deploy':
-      switch(envType) {
+      switch (envType) {
         case 'development':
         case 'testing':
         case 'stagging':
         case 'production':
           jiraSendDeploymentInfo(
-            environmentId: "${envType}-${gitBranch}-${env.BUILD_NUMBER}",
-            environmentName: '开发环境',
-            environmentType: envType,
-            site: jiraSite
+              environmentId: "${envType}-${gitBranch}-${env.BUILD_NUMBER}",
+              environmentName: '开发环境',
+              environmentType: envType,
+              site: jiraSite
           )
           break
       }
       break;
   }
 }
+
+properties([
+    [$class: 'GithubProjectProperty', displayName: 'INK', projectUrlStr: 'https://github.com/o-w-o/ink-draft/']
+])
 
 properties([
     [$class: 'GithubProjectProperty', displayName: 'INK', projectUrlStr: 'https://github.com/o-w-o/ink-draft/'],
@@ -221,7 +225,7 @@ node {
   }
 
   stage('setup:debug') {
-    if(env.BRANCH_NAME != 'master'){
+    if (env.BRANCH_NAME != 'master') {
       echo """debug:
               构建版本号为 [${appImage.dockerTag}], 
               镜像为[${appImage.dockerImageNameWithTag}]
@@ -296,8 +300,8 @@ node {
 
   stage('notify:post') {
     notify(
-      type: 'post',
-      payload: """
+        type: 'post',
+        payload: """
         <li>docker：${appImage.dockerImageNameWithTag}<li>
       """
     )
