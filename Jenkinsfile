@@ -145,7 +145,7 @@ def notifyJira(args) {
 }
 
 node {
-  properties([pipelineTriggers([githubPush()])])
+  properties([pipelineTriggers([$class: "GitHubPushTrigger"])])
 
   checkout scm
 
