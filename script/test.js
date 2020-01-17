@@ -42,3 +42,9 @@ const GenericTrigger404Res = {
       "If you are using a token, you need to pass it like ...trigger/invoke?token=TOKENHERE. " +
       "If you are not using a token, you need to authenticate like http://user:passsword@jenkins/generic-webhook... "
 }
+
+const MultibranchScanTrigger {
+  'hotfix/INK-26': [
+      'case2'
+  ]
+}
