@@ -161,7 +161,7 @@ withCredentials([string(credentialsId: 'genericTriggerTokenId', variable: 'gener
        printPostContent         : true,
        token                    : genericTriggerToken,
        regexpFilterText         : '$ref',
-       regexpFilterExpression   : "refs/heads/${BRANCH_NAME}"
+       regexpFilterExpression   : '^refs/heads/' + "${BRANCH_NAME}" + '$'
       ]
     ])
   ])
