@@ -8,7 +8,10 @@ import camelcaseKeys from "camelcase-keys";
 import { IReducerAction } from "../../reducers";
 import { setProfile, setProfileLoading } from "./store";
 
-export const fetchProfile = createAction("profile/fetch");
+const fetchProfile = createAction("profile/fetch");
+export const emitters = {
+  fetchProfile,
+};
 
 export const fetchProfileEpics = (
   actions$: ActionsObservable<IReducerAction>

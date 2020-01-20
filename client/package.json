@@ -19,6 +19,7 @@
     "immutable": "^4.0.0-rc.12",
     "ix": "^2.5.3",
     "lodash": "^4.17.15",
+    "normalize.css": "^8.0.1",
     "pouchdb-adapter-idb": "^7.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

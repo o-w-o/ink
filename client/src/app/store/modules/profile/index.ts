@@ -1,13 +1,14 @@
 import { profileSlice } from "./store";
-import { fetchProfile, profileEpic } from "./epics";
 
 const { actions, reducer, name } = profileSlice;
+import * as getters from "./selectors";
+import { emitters, profileEpic } from "./epics";
+
 export const profileStore = {
   name,
-  actions,
+  getters,
+  setters: actions,
   reducer,
-  emitters: {
-    fetchProfile,
-  },
+  emitters,
   epic: profileEpic,
 };

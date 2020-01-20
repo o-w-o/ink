@@ -3,14 +3,20 @@ import { WebSocketSubject, WebSocketSubjectConfig } from "rxjs/webSocket";
 class SocketHelper {
   subject: any;
   pending: boolean = true;
+  status: number = 1;
   webSocketSubjectConfig: WebSocketSubjectConfig<any>;
 
   async $o(cb?: Function) {
     while (this.pending) {
-      await new Promise((resolve) => {
-        console.log("等待连接……");
-        setTimeout(resolve, 1000);
-      });
+      if (status) {
+        await new Promise((resolve) => {
+          console.log("等待连接……", this.status);
+          setTimeout(resolve, 1000);
+        });
+      } else {
+        this.pending = false;
+        console.log("连接异常！", this.status);
+      }
     }
 
     if (cb) {
@@ -19,6 +25,7 @@ class SocketHelper {
   }
 
   initConfig() {
+    const s = (ss) => (this.status = ss);
     this.webSocketSubjectConfig = {
       url: "ws://localhost:8084",
       openObserver: {
@@ -31,7 +38,7 @@ class SocketHelper {
       closeObserver: {
         next(closeEvent) {
           console.log(`连接断开！evt ->`, closeEvent);
-          this.pending = true;
+          s(-1);
         },
       },
       binaryType: "arraybuffer",

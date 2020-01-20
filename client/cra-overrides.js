@@ -1,28 +1,44 @@
-const { override: _, addBundleVisualizer, addPostcssPlugins } = require("customize-cra");
+const {
+  override,
+  addBundleVisualizer,
+  addPostcssPlugins,
+  addWebpackAlias,
+  addDecoratorsLegacy,
+} = require("customize-cra");
 const path = require("path");
 
 module.exports = {
   // The Webpack config to use when compiling your react app for development or production.
   webpack: function(_config_, env) {
     // console.debug("env ->", env);
-
-    const config = _(
-      process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer(),
-      addPostcssPlugins(
-        [
-          require("postcss-preset-env")({
-            stage: 2,
-            features: {
-              "nesting-rules": true
-            },
-            browsers: "last 2 versions"
-          })
-        ]
-      )
-    )(_config_, env);
     // console.log("config ->", config);
-    
-    return config
+
+    return override(
+      addWebpackAlias({
+        "@o-w-o/ui": path.resolve(__dirname, "src/sdk/ui/"),
+        "@o-w-o/domain": path.resolve(__dirname, "src/sdk/domain"),
+        "@o-w-o/helper": path.resolve(__dirname, "src/sdk/helper"),
+        "@o-w-o/store": path.resolve(__dirname, "src/app/store/"),
+        "@o-w-o/template": path.resolve(__dirname, "src/app/template/"),
+        "@o-w-o/view": path.resolve(__dirname, "src/app/view/"),
+        "@o-w-o/uis": path.resolve(__dirname, "src/sdk/ui/components"),
+        "@o-w-o/domains": path.resolve(__dirname, "src/sdk/domain/modules"),
+        "@o-w-o/stores": path.resolve(__dirname, "src/app/store/modules"),
+        "@o-w-o/templates": path.resolve(__dirname, "src/app/template/modules"),
+        "@o-w-o/views": path.resolve(__dirname, "src/app/view/modules"),
+      }),
+      addDecoratorsLegacy(),
+      addPostcssPlugins([
+        require("postcss-preset-env")({
+          stage: 2,
+          features: {
+            "nesting-rules": true,
+          },
+          browsers: "last 2 versions",
+        }),
+      ]),
+      process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer()
+    )(_config_, env);
   },
   // The Jest config to use when running your jest tests - note that the normal rewires do not
   // work here.
@@ -70,10 +86,11 @@ module.exports = {
   },
   // The paths config to use when compiling your react app for development or production.
   paths: function(paths, env) {
-    // console.debug("paths ->", paths);
+    console.debug("paths ->", paths);
 
     return Object.assign(paths, {
       appBuild: path.join(__dirname, "../dist/public"),
+      appIndexJs: path.join(__dirname, "./src/app/index.tsx"),
     });
   },
 };

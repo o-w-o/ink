@@ -3,20 +3,18 @@ import { createStructuredSelector, Selector } from "reselect";
 import { RecordOf } from "immutable";
 
 import { IPreloaderState } from "../store/reducers";
-
-import {
-  $projects_,
-  $user_,
-  loading_,
-  uuid_,
-} from "../store/modules/profile/selectors";
-import { fetchProfile } from "../store/modules/profile/epics";
+import { profileStore } from "@o-w-o/stores/profile";
 
 import {
   Demo,
   IDemoDispatchToProps,
   IDemoStateToProps,
-} from "../template/modules/demo";
+} from "@o-w-o/templates/demo";
+
+const {
+  getters: { $projects_, $user_, loading_, uuid_ },
+  emitters: { fetchProfile },
+} = profileStore;
 
 const mapStateToProps: Selector<
   RecordOf<IPreloaderState>,

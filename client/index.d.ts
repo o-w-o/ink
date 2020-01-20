@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import { IPreloaderState } from "./src/store/reducers";
+import { IPreloaderState } from "@o-w-o/store/reducers";
 
 export interface ISite {
   siteMetadata: {

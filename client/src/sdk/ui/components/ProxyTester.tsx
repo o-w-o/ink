@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { forkJoin, of } from "rxjs";
 import { ajax } from "rxjs/ajax";
 import { map, mergeMap, tap } from "rxjs/operators";
-import { useDispatch } from "react-redux";
+
+import { emitters } from "@o-w-o/stores/profile/epics";
+
 import ReactJson from "react-json-view";
-import { fetchProfile } from "../../store/modules/profile/epics";
 
 export function useProxyTester() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -16,7 +18,7 @@ export function useProxyTester() {
     of(0)
       .pipe(
         tap(() => setLoading(true)),
-        tap(() => dispatch(fetchProfile())),
+        tap(() => dispatch(emitters.fetchProfile())),
         mergeMap(() =>
           forkJoin(
             ajax.getJSON("/api/auth/token?username=demo&password=23333")

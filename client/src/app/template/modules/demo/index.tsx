@@ -1,15 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { Box, Button } from "@material-ui/core";
 import { ArrowForward } from "@material-ui/icons";
-
-import { IUserRecord } from "../../../domain/modules/demo/Demo";
-
 import { Parallax } from "react-spring/renderprops-addons.cjs";
 
-import { Box1 } from "../../components/Layout/boxes/Box1";
-import { Sample1 } from "../../components/Box/Sample";
+import { IUserRecord } from "@o-w-o/domains/demo/Demo";
+
+import { Box1 } from "@o-w-o/uis/Layout/boxes/Box1";
+import { Sample1 } from "@o-w-o/uis/Box/Sample";
+
 import { UserProfileCard } from "./components/UserProfileCard";
 
 export interface IDemoStateToProps {
@@ -45,9 +44,9 @@ export class Demo extends React.Component<IDemoProps, never> {
             />
           </Sample1>
           <Sample1>
-            <Link to="/">
-              <Button>返回主页</Button>
-            </Link>
+            <Button component={Link} to="/">
+              返回主页
+            </Button>
           </Sample1>
         </Box1>
       </Parallax>

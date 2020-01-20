@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@o-w-o/ui": ["src/sdk/ui/"],
+      "@o-w-o/ui/*": ["src/sdk/ui/*"],
+      "@o-w-o/domain": ["src/sdk/domain"],
+      "@o-w-o/domain/*": ["src/sdk/domain/*"],
+      "@o-w-o/helper": ["src/sdk/helper"],
+      "@o-w-o/helper/*": ["src/sdk/helper/*"],
+      "@o-w-o/store": ["src/app/store/index.ts"],
+      "@o-w-o/store/*": ["src/app/store/*"],
+      "@o-w-o/template": ["src/app/template/index.ts"],
+      "@o-w-o/template/*": ["src/app/template/*"],
+      "@o-w-o/view": ["src/app/view/index.ts"],
+      "@o-w-o/view/*": ["src/app/view/*"],
+
+      "@o-w-o/uis/*": ["src/sdk/ui/components/*"],
+      "@o-w-o/domains/*": ["src/sdk/domain/modules/*"],
+      "@o-w-o/stores/*": ["src/app/store/modules/*"],
+      "@o-w-o/templates/*": ["src/app/template/modules/*"],
+      "@o-w-o/views/*": ["src/app/view/modules/*"]
+    }
+  }
+}

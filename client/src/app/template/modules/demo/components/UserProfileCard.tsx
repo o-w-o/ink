@@ -13,8 +13,8 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import "./UserProfileCard.css";
 
-import { IUserRecord } from "../../../../domain/modules/demo/Demo";
-import { ProxyTester } from "../../../components/ProxyTester";
+import { IUserRecord } from "@o-w-o/domains/demo/Demo";
+import { ProxyTester } from "@o-w-o/uis/ProxyTester";
 
 interface IProps {
   user: IUserRecord;

@@ -7,7 +7,7 @@ import {
   IUser,
   ProjectRecord,
   UserRecord,
-} from "../../../domain/modules/demo/Demo";
+} from "@o-w-o/domains/demo/Demo";
 
 export interface IProfileState {
   uuid: string;

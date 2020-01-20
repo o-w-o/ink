@@ -4,10 +4,12 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router/immutable";
 import { CssBaseline } from "@material-ui/core";
 
+import "normalize.css";
 import "./index.css";
 import { history } from "./store/utils/history";
 import { Router } from "./view/routes";
 import { configureStore } from "./store";
+
 import * as serviceWorker from "./serviceWorker";
 
 if (process.env.NODE_ENV === "development") {
@@ -21,9 +23,9 @@ const store = configureStore(window.__INITIAL_STATE__);
 
 ReactDOM.render(
   <React.Fragment>
-    <CssBaseline />
     <Provider store={store}>
       <ConnectedRouter history={history}>
+        <CssBaseline />
         <Router />
       </ConnectedRouter>
     </Provider>
