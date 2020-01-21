@@ -4,6 +4,8 @@ const {
   addPostcssPlugins,
   addWebpackAlias,
   addDecoratorsLegacy,
+  useEslintRc,
+  enableEslintTypescript,
 } = require("customize-cra");
 const path = require("path");
 
@@ -14,6 +16,8 @@ module.exports = {
     // console.log("config ->", config);
 
     return override(
+      useEslintRc(path.resolve(__dirname, "../.eslintrc.js")),
+      enableEslintTypescript(),
       addWebpackAlias({
         "@o-w-o/ui": path.resolve(__dirname, "src/sdk/ui/"),
         "@o-w-o/domain": path.resolve(__dirname, "src/sdk/domain"),
