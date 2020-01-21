@@ -223,7 +223,7 @@ node {
         sh "npm config set prefix ~/.node_global_modules && npm config set cache ~/.node_modules"
 
         echo "1.4 安装 npm"
-        sh "npm ci --production"
+        sh "npm ci"
 
         echo '1.5 获取 项目 package.json 中的应用信息'
         appImage.dockerArgsPort = sh(returnStdout: true, script: "node ./script/port.js").trim()

@@ -1,7 +1,7 @@
 {
-  "name": "@o-w-o/app--draft",
+  "name": "@o-w-o/lab",
   "version": "1.0.0",
-  "description": "o-w-o/app draft",
+  "description": "o-w-o/lab 实验室",
   "scripts": {
     "dev": "NODE_ENV=development npm run dev:server & npm run dev:client",
     "dev:ms": "set NODE_ENV=development && npm run dev:ms:server & npm run dev:ms:client",

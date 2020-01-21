@@ -12,5 +12,10 @@ module.exports = {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/camelcase": 0
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   }
 };
