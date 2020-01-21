@@ -146,6 +146,7 @@ def notifyJira(args) {
 
 withCredentials([string(credentialsId: 'genericTriggerTokenId', variable: 'genericTriggerToken')]) {
   properties([
+    overrideIndexTriggers(true),
     pipelineTriggers([
       [$class                   : 'GenericTrigger',
        genericVariables         : [
