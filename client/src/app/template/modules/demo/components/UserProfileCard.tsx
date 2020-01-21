@@ -39,7 +39,7 @@ export const UserProfileCard = React.memo<IProps>(
     );
 
     return (
-      <Box p={{ xs: 1, sm: 3, md: 5 }} textAlign="left" className="t">
+      <Box p={{ xs: 1, sm: 3, md: 5 }} textAlign="left" className="UserProfileCard">
         <If condition={!loading}>
           <Then>
             <Card>

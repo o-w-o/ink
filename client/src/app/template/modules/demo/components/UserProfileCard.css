@@ -1,5 +1,5 @@
 @media(width < 720px) {
-  .t {
+  .UserProfileCard {
     & .MuiCardHeader-avatar {
       display: none;
     }
