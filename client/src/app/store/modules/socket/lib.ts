@@ -8,7 +8,7 @@ class SocketHelper {
 
   async $o(cb?: Function) {
     while (this.pending) {
-      if (status) {
+      if (this.status) {
         await new Promise((resolve) => {
           console.log("等待连接……", this.status);
           setTimeout(resolve, 1000);
