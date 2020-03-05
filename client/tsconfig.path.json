@@ -3,6 +3,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
+      "@o-w-o/config/*": ["src/sdk/config/*"],
       "@o-w-o/ui": ["src/sdk/ui/"],
       "@o-w-o/ui/*": ["src/sdk/ui/*"],
       "@o-w-o/domain": ["src/sdk/domain"],

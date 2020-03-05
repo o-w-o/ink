@@ -1,70 +1,36 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import { createEpicMiddleware } from "redux-observable";
-import { routerMiddleware as createRouterMiddleware } from "connected-react-router/immutable";
-import { BehaviorSubject, merge, Observable } from "rxjs";
-import { map, mergeMap } from "rxjs/operators";
-import { history } from "./utils/history";
-import { dbHelper } from "./modules/db/lib";
-import { IPreloaderState } from "./reducers";
-import { triggerCacheStore } from "./modules/db/epics";
-import { socketHelper } from "./modules/socket/lib";
-import { triggerSocket } from "./modules/socket/epics";
+import { routerMiddleware as createRouterMiddleware } from "connected-react-router";
+import { curry, merge } from "lodash";
 
-export const connectStore = (
-  reducers: any,
+import { epicsRunner } from "@o-w-o/store/epics";
+
+import { IPreloaderState, preloaderState } from "./reducers";
+import { isDev } from "../../sdk/toolkit/is";
+
+export const curriedConfigureStore = function(
+  reducer: any,
   initialState: IPreloaderState,
-  epics: any
-) => {
-  const env = process.env.NODE_ENV;
-
+  history
+) {
   const epicMiddleware = createEpicMiddleware();
   const routerMiddleware = createRouterMiddleware(history);
   const middleware = [epicMiddleware, routerMiddleware];
+  const devTools = isDev();
 
-  const enhancers: any[] = [];
-  let composeEnhancers = compose;
-
-  if (env === "development") {
-    console.assert(env === "development", `env[${env}] !== development`);
-    console.info(`env -> [${env}]`);
-
-    const composeWithDevToolsExtension =
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-    if (typeof composeWithDevToolsExtension === "function") {
-      composeEnhancers = composeWithDevToolsExtension;
-    }
-  }
-
-  const store = createStore(
-    reducers,
-    initialState,
-    composeEnhancers(applyMiddleware(...middleware), ...enhancers)
-  );
-
-  const m = module;
-  if (m.hot) {
-    m.hot.accept("./reducers", () => {
-      store.replaceReducer(reducers);
-    });
-  }
-
-  const epic$ = new BehaviorSubject(epics);
-
-  dbHelper.init().then(() => {
-    socketHelper.init().then(() => {
-      const rootEpic = (action$: any, state$: any): Observable<any> =>
-        merge(
-          socketHelper.$().pipe(map(triggerSocket)),
-          dbHelper.$().pipe(map(triggerCacheStore)),
-          epic$.pipe(mergeMap((epic) => epic(action$, state$)))
-        );
-
-      epicMiddleware.run(rootEpic);
-    });
+  const store = configureStore({
+    reducer,
+    devTools,
+    preloadedState: merge(initialState, preloaderState),
+    enhancers: () => [applyMiddleware(...middleware)],
   });
 
-  dbHelper.$o(() => dbHelper.test());
-  socketHelper.$o(() => socketHelper.test());
+  if (module.hot) {
+    module.hot.accept("./reducers", () => {
+      store.replaceReducer(reducer);
+    });
+  }
 
+  epicsRunner(epicMiddleware);
   return store;
 };

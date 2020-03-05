@@ -8,7 +8,7 @@ import camelcaseKeys from "camelcase-keys";
 import { IReducerAction } from "../../reducers";
 import { setProfile, setProfileLoading } from "./store";
 
-const fetchProfile = createAction("profile/fetch");
+const fetchProfile = createAction("profile/fetchProfile");
 export const emitters = {
   fetchProfile,
 };

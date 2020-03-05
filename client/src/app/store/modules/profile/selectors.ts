@@ -1,22 +1,20 @@
-import { RecordOf } from "immutable";
-import { createSelector } from "../../utils/selector";
+import { createSelector } from "@reduxjs/toolkit";
 import { IPreloaderState } from "../../reducers";
-import { IProfileState } from "./store";
+import { ProfileState } from "./store";
 
-export const $profileState_ = ($state: RecordOf<IPreloaderState>) =>
-  $state.profile;
+export const $profileState_ = ($state: IPreloaderState) => $state.profile;
 
 export const uuid_ = createSelector(
   $profileState_,
-  ($state: RecordOf<IProfileState>) => $state.uuid
+  ($state: ProfileState) => $state.uuid
 );
-
-export const $projects_ = createSelector($profileState_, ($state) => {
-  return $state.$projects;
-});
 
 export const $user_ = createSelector($profileState_, ($state) => {
   return $state.$user;
+});
+
+export const $projects_ = createSelector($user_, ($state) => {
+  return $state.projects;
 });
 
 export const loading_ = createSelector(

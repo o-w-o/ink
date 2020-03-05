@@ -13,11 +13,11 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import "./UserProfileCard.css";
 
-import { IUserRecord } from "@o-w-o/domains/demo/Demo";
+import { User } from "@o-w-o/domains/demo/Demo";
 import { ProxyTester } from "@o-w-o/uis/ProxyTester";
 
 interface IProps {
-  user: IUserRecord;
+  user: User;
   triggerSlot: any;
   loading: boolean;
 }

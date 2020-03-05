@@ -111,12 +111,17 @@ class RxDBHelper {
   }
 
   async test() {
-    await this.db.heroes.atomicUpsert({
-      passportId: "myId",
-      firstName: "piotr",
-      lastName: "potter",
-      age: 5,
-    });
+    console.log(
+      "db Test -> ",
+      await this.db.heroes
+        .atomicUpsert({
+          passportId: "myId",
+          firstName: "piotr",
+          lastName: "potter",
+          age: 5,
+        })
+        .then((v) => v.toJSON())
+    );
   }
 
   async destroy() {

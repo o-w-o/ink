@@ -2,7 +2,6 @@ import * as Hapi from "@hapi/hapi";
 import * as Path from "path";
 import * as H2o2 from "@hapi/h2o2";
 import * as Inert from "@hapi/inert";
-import * as Nes from "@hapi/nes";
 import * as Logger from "hapi-pino";
 import { ENV, portConfig } from "../config";
 
@@ -81,7 +80,6 @@ export class Proxy {
 
     await this.proxyServer.register(H2o2);
     await this.proxyServer.register(Inert);
-    await this.proxyServer.register(Nes);
 
     await this.proxyServer.register({
       plugin: Logger,
@@ -100,12 +98,6 @@ export class Proxy {
 
       return h.continue;
     });
-
-    setInterval(() => {
-      const msg = `xxx-${Math.floor(Math.random() * 1000)}`;
-      this.proxyServer.broadcast(msg);
-      console.log("msg", msg);
-    }, 1000);
 
     return this.proxyServer;
   }

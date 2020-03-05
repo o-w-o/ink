@@ -4,7 +4,7 @@ import { Box, Button } from "@material-ui/core";
 import { ArrowForward } from "@material-ui/icons";
 import { Parallax } from "react-spring/renderprops-addons.cjs";
 
-import { IUserRecord } from "@o-w-o/domains/demo/Demo";
+import { User } from "@o-w-o/domains/demo/Demo";
 
 import { Box1 } from "@o-w-o/uis/Layout/boxes/Box1";
 import { Sample1 } from "@o-w-o/uis/Box/Sample";
@@ -12,7 +12,7 @@ import { Sample1 } from "@o-w-o/uis/Box/Sample";
 import { UserProfileCard } from "./components/UserProfileCard";
 
 export interface IDemoStateToProps {
-  $user: IUserRecord;
+  $user: User;
   loading: boolean;
 }
 

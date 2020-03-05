@@ -1,47 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Record, RecordOf } from "immutable";
-import { uniqueId } from "lodash";
+import { uniqueId, merge } from "lodash";
 
-import {
-  IProject,
-  IUser,
-  ProjectRecord,
-  UserRecord,
-} from "@o-w-o/domains/demo/Demo";
+import { User } from "@o-w-o/domains/demo/Demo";
 
-export interface IProfileState {
-  uuid: string;
-  $projects: RecordOf<IProject>;
-  $user: RecordOf<IUser>;
+export interface ProfileState {
   loading: boolean;
+  uuid: string;
+  $user: User;
 }
 
-export const initialProfileStateRecord: IProfileState = {
-  uuid: uniqueId(),
-  $projects: new ProjectRecord(),
-  $user: new UserRecord(),
+export const initialProfileState: ProfileState = {
   loading: true,
+  uuid: uniqueId(),
+  $user: User.initialValue,
 };
-
-export const ProfileStateRecord: Record.Factory<IProfileState> = Record<
-  IProfileState
->(initialProfileStateRecord, "[[ProfileStateRecord]]");
-export const initialProfileState: RecordOf<IProfileState> = new ProfileStateRecord();
 
 export const profileSlice = createSlice({
   name: "profile",
   initialState: initialProfileState,
   reducers: {
-    setProfile: ($state, action: PayloadAction<{ user: IUser }>) => {
-      const { user } = action.payload;
-      return $state.update("$user", ($state) => $state.merge(user));
+    setProfile: ($state, action: PayloadAction<{ user: User }>) => {
+      $state.$user = merge($state.$user, action.payload.user);
     },
     setProfileLoading: (
       $state,
       action: PayloadAction<{ loading: boolean }>
     ) => {
-      const { loading } = action.payload;
-      return $state.update("loading", () => loading);
+      $state.loading = action.payload.loading;
     },
   },
 });

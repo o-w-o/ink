@@ -2,12 +2,12 @@ import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import { ActionsObservable, combineEpics, ofType } from "redux-observable";
 import { mergeMap, tap } from "rxjs/operators";
 
-export const SocketNamespace = "@@socket";
+export const SOCKET_NAMESPACE = "@@socket";
 
 export const triggerSocket = createAction<any, string>(
-  `${SocketNamespace}/TRIGGER`
+  `${SOCKET_NAMESPACE}/TRIGGER`
 );
-export const dispatchSocket = createAction(`${SocketNamespace}/DISPATCH`);
+export const dispatchSocket = createAction(`${SOCKET_NAMESPACE}/DISPATCH`);
 
 export const triggerSocketEpics = (
   actions$: ActionsObservable<PayloadAction>

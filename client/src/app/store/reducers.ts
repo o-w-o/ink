@@ -1,8 +1,7 @@
-import { combineReducers } from "redux-immutable";
-import { ProfileStateRecord, IProfileState } from "./modules/profile/store";
+import { combineReducers } from "@reduxjs/toolkit";
+import { initialProfileState, ProfileState } from "./modules/profile/store";
 import { profileStore } from "./modules/profile";
-import { routerReducer, RouterStateRecord } from "./modules/router/reducer";
-import { Record, RecordOf } from "immutable";
+import { defaultRouterState, routerReducer } from "./modules/router";
 
 export interface IReducerAction {
   type: string | symbol;
@@ -10,19 +9,15 @@ export interface IReducerAction {
 }
 
 export interface IPreloaderState {
-  profile: RecordOf<IProfileState>;
+  profile: ProfileState;
   router: any;
 }
 const defaultPreloaderState: IPreloaderState = {
-  profile: new ProfileStateRecord(),
-  router: new RouterStateRecord(),
+  profile: initialProfileState,
+  router: defaultRouterState,
 };
 
-export const PreloaderStateRecord: Record.Factory<IPreloaderState> = Record<
-  IPreloaderState
->(defaultPreloaderState, "[[PreloaderStateRecord]]");
-
-export const preloaderStateRecord: RecordOf<IPreloaderState> = new PreloaderStateRecord();
+export const preloaderState: IPreloaderState = defaultPreloaderState;
 
 export const reducers = combineReducers({
   profile: profileStore.reducer,

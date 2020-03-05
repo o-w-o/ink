@@ -1,6 +1,6 @@
 export { IPreloaderState } from "../reducers";
 
-export interface IStoreModule {
+export class StoreModule {
   name: string;
   setters: any;
   getters: any;

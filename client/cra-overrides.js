@@ -19,6 +19,7 @@ module.exports = {
       useEslintRc(path.resolve(__dirname, "../.eslintrc.js")),
       enableEslintTypescript(),
       addWebpackAlias({
+        "@o-w-o/config": path.resolve(__dirname, "src/sdk/config/"),
         "@o-w-o/ui": path.resolve(__dirname, "src/sdk/ui/"),
         "@o-w-o/domain": path.resolve(__dirname, "src/sdk/domain"),
         "@o-w-o/helper": path.resolve(__dirname, "src/sdk/helper"),
@@ -72,7 +73,18 @@ module.exports = {
     // a starting configuration to then modify instead of having to create a config from scratch.
     return function(proxy, allowedHost) {
       // Create the default config by calling configFunction with the proxy/allowedHost parameters
-      const config = configFunction(proxy, allowedHost);
+      const config = configFunction(
+        {
+          "/api": {
+            target: "http://localhost:8080",
+            pathRewrite: {
+              "^/api": "",
+            },
+            changeOrigin: true,
+          },
+        },
+        allowedHost
+      );
 
       // Change the https certificate options to match your certificate, using the .env file to
       // set the file paths & passphrase.

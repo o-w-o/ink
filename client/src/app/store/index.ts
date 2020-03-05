@@ -1,9 +1,8 @@
-import { connectStore } from "./store";
-import { IPreloaderState, PreloaderStateRecord, reducers } from "./reducers";
-import epics from "./epics";
+import { curriedConfigureStore } from "./store";
+import { IPreloaderState, reducers } from "./reducers";
 
-export const configureStore = (initialState: IPreloaderState) => {
+export const configureStore = (initialState: IPreloaderState, history: any) => {
   console.log("Initial state: ", initialState);
 
-  return connectStore(reducers, new PreloaderStateRecord(initialState), epics);
+  return curriedConfigureStore(reducers, initialState, history);
 };
