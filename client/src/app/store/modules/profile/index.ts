@@ -12,3 +12,5 @@ export const profileStore = {
   emitters,
   epic: profileEpic,
 };
+
+export { initialProfileState } from "./store";

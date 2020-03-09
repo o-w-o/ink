@@ -1,5 +1,7 @@
 import { WebSocketSubject, WebSocketSubjectConfig } from "rxjs/webSocket";
 import { remoteUrl } from "@o-w-o/config/websocket";
+import { User } from "@o-w-o/domains/demo/Demo";
+import { tokenPersistence } from "@o-w-o/stores/db/modules/tokens.persistence";
 
 enum SocketConnectionStatus {
   PENDING,
@@ -7,7 +9,7 @@ enum SocketConnectionStatus {
   FAILURE,
 }
 
-class SocketHelper {
+class SocketToolkit {
   subject: any;
   pending: boolean = true;
   status: SocketConnectionStatus = SocketConnectionStatus.PENDING;
@@ -44,7 +46,7 @@ class SocketHelper {
   initConfig() {
     const s = (ss) => (this.status = ss);
     this.webSocketSubjectConfig = {
-      url: remoteUrl(),
+      url: remoteUrl("5") + `/${tokenPersistence.getAccessToken()}`,
       openObserver: {
         next: () => {
           console.log("建立连接！");
@@ -78,9 +80,11 @@ class SocketHelper {
 
   test() {
     setInterval(() => {
-      this.subject.next(`hi + ${new Date().getDay()} `);
+      const u = new User();
+      u.id = new Date().getMilliseconds().toString();
+      this.subject.next(JSON.stringify(u));
     }, 3000);
   }
 }
 
-export const socketHelper = new SocketHelper();
+export const socketHelper = new SocketToolkit();

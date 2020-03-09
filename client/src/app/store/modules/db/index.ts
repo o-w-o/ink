@@ -2,6 +2,7 @@ import {
   triggerCacheStore,
   dispatchCacheStore,
   tryCacheStore,
+  storeToken,
   dbEpic,
 } from "./epics";
 import { dbHelper } from "./lib";
@@ -11,6 +12,7 @@ export const dbStore = {
     triggerCacheStore,
     dispatchCacheStore,
     tryCacheStore,
+    storeToken,
   },
   epic: dbEpic,
   helper: dbHelper,

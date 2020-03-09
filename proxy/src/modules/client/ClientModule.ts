@@ -7,7 +7,7 @@ import {
 import * as Hapi from "@hapi/hapi";
 import * as Path from "path";
 import { proxyType, proxyUri } from "../../utils/proxy";
-import { ENV, NodeEnvEnum, portConfig } from "../../config";
+import { ENV, portConfig } from "../../config";
 
 export class ClientModule implements IClientModule {
   static get defaultOptions(): IClientModuleOptions {
@@ -16,7 +16,7 @@ export class ClientModule implements IClientModule {
       baseUri: `http://localhost:${portConfig.client[ENV]}`,
       namespace: "",
       distDir: Path.join(__dirname, "../../public"),
-      env: ENV ? ENV.trim() : NodeEnvEnum.DEVELOPMENT,
+      env: ENV,
     };
   }
 
@@ -66,6 +66,7 @@ export class ClientModule implements IClientModule {
       },
     });
   }
+
   registerRouteToStatic(server: IProxy) {
     const { options } = this;
 

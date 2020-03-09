@@ -1,54 +1,66 @@
-import { combineEpics, EpicMiddleware } from "redux-observable";
+import { combineEpics, Epic, EpicMiddleware } from "redux-observable";
 
-import { merge } from "lodash";
-import { BehaviorSubject, Observable } from "rxjs";
-import { map, mergeMap, tap } from "rxjs/operators";
+import { BehaviorSubject, Observable, merge, of, from } from "rxjs";
+import { catchError, map, mergeMap } from "rxjs/operators";
 
 import { dbStore } from "@o-w-o/stores/db";
 import { socketStore } from "@o-w-o/stores/socket";
 import { profileStore } from "@o-w-o/stores/profile";
+import { IReducerAction } from "@o-w-o/store/reducers";
 
-export const epics = [profileStore.epic, dbStore.epic, socketStore.epic];
+class EpicToolkit {
+  private epic$: BehaviorSubject<Epic<IReducerAction, any, void>>;
+  private readonly epics = combineEpics(
+    dbStore.epic,
+    socketStore.epic,
+    profileStore.epic
+  );
 
-export const epicsRunner = function(epicMiddleware: EpicMiddleware<any>) {
-  const epic$ = new BehaviorSubject(combineEpics(...epics));
+  constructor() {
+    this.epic$ = new BehaviorSubject(this.epics);
+    console.log("Init ->", this.epic$);
+  }
 
-  dbStore.helper
-    .init()
-    .then(() => {
-      socketStore.helper
+  getRunner() {
+    return (epicMiddleware: EpicMiddleware<any>) =>
+      dbStore.helper
         .init()
         .then(() => {
-          const rootEpic = (
-            action$: any,
-            state$: any,
-            dependencies: any
-          ): Observable<any> =>
-            merge(
-              socketStore.helper
-                .$()
-                .pipe(
-                  tap(console.log),
-                  map(socketStore.emitters.triggerSocket)
-                ),
-              dbStore.helper
-                .$()
-                .pipe(
-                  tap(console.log),
-                  map(dbStore.emitters.triggerCacheStore)
-                ),
-              epic$.pipe(
-                mergeMap((epic) => epic(action$, state$, dependencies))
-              )
-            );
+          socketStore.helper
+            .init()
+            .then(() => {
+              const rootEpic = (
+                action$: any,
+                state$: any,
+                dependencies: any
+              ): Observable<any> =>
+                merge(
+                  socketStore.helper
+                    .$()
+                    .pipe(map(socketStore.emitters.triggerSocket)),
+                  dbStore.helper
+                    .$()
+                    .pipe(map(dbStore.emitters.triggerCacheStore)),
+                  this.epic$.pipe(
+                    mergeMap((epic) => epic(action$, state$, dependencies))
+                  )
+                );
 
-          epicMiddleware.run(rootEpic);
+              epicMiddleware.run(rootEpic);
+            })
+            .finally(() => {
+              socketStore.helper.$o(() => socketStore.helper.test());
+            });
         })
         .finally(() => {
-          socketStore.helper.$o(() => socketStore.helper.test());
+          dbStore.helper.$o(() => dbStore.helper.test());
         });
-    })
-    .finally(() => {
-      dbStore.helper.$o(() => dbStore.helper.test());
-    });
-};
+  }
+
+  attachEpic(epic) {
+    this.epic$.next(epic);
+    return this;
+  }
+}
+
+export const epicToolkit = new EpicToolkit();

@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { initialProfileState, ProfileState } from "./modules/profile/store";
-import { profileStore } from "./modules/profile";
-import { defaultRouterState, routerReducer } from "./modules/router";
+import { profileStore, initialProfileState } from "@o-w-o/stores/profile";
+import { defaultRouterState, routerReducer } from "@o-w-o/stores/router";
+import { ProfileState } from "@o-w-o/stores/profile/store";
 
 export interface IReducerAction {
   type: string | symbol;

@@ -1,34 +1,22 @@
-import RxDB, { RxCollection, RxDatabase, RxDocument, RxJsonSchema } from "rxdb";
+import RxDB, { RxDatabase } from "rxdb";
+import { HeroCollection, heroesDbModule } from "./modules/sample";
+import {
+  TokenCollection,
+  tokenMiddlewareHooks,
+  tokensDbModule,
+} from "./modules/tokens";
 
 RxDB.plugin(require("pouchdb-adapter-idb"));
 
-type Hero = {
-  passportId: string;
-  firstName: string;
-  lastName: string;
-  age?: number;
-};
-
-type HeroDocMethods = {
-  scream: (v: string) => string;
-};
-
-type HeroCollectionMethods = {
-  countAllDocuments: () => Promise<number>;
-};
-
-type HeroDocument = RxDocument<Hero, HeroDocMethods>;
-
-type HeroCollection = RxCollection<Hero, HeroDocMethods, HeroCollectionMethods>;
-
 type MyDatabaseCollections = {
   heroes: HeroCollection;
+  tokens: TokenCollection;
 };
 
 type MyDatabase = RxDatabase<MyDatabaseCollections>;
 
-class RxDBHelper {
-  db!: MyDatabase;
+class RxDBToolkit {
+  db: MyDatabase;
   pending: boolean = true;
 
   async $o(cb: Function) {
@@ -61,49 +49,10 @@ class RxDBHelper {
   }
 
   async initCollection() {
-    const heroSchema: RxJsonSchema<Hero> = {
-      title: "human schema",
-      description: "describes a human being",
-      version: 0,
-      keyCompression: true,
-      type: "object",
-      properties: {
-        passportId: {
-          type: "string",
-          primary: true,
-        },
-        firstName: {
-          type: "string",
-        },
-        lastName: {
-          type: "string",
-        },
-        age: {
-          type: "integer",
-        },
-      },
-      required: ["firstName", "lastName"],
-    };
+    await this.db.collection(heroesDbModule);
+    await this.db.collection(tokensDbModule);
 
-    const heroDocMethods: HeroDocMethods = {
-      scream: function(this: HeroDocument, what: string) {
-        return this.firstName + " screams: " + what.toUpperCase();
-      },
-    };
-
-    const heroCollectionMethods: HeroCollectionMethods = {
-      countAllDocuments: async function(this: HeroCollection) {
-        const allDocs = await this.find().exec();
-        return allDocs.length;
-      },
-    };
-
-    await this.db.collection({
-      name: "heroes",
-      schema: heroSchema,
-      methods: heroDocMethods,
-      statics: heroCollectionMethods,
-    });
+    this.db.tokens.postInsert(tokenMiddlewareHooks.postSave, false);
 
     this.db.heroes.postInsert(function fun(this: HeroCollection, docData, doc) {
       console.log("insert to " + this.name + "-collection: " + doc.firstName);
@@ -133,4 +82,4 @@ class RxDBHelper {
   }
 }
 
-export const dbHelper = new RxDBHelper();
+export const dbHelper = new RxDBToolkit();
