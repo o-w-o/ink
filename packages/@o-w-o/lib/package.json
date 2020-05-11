@@ -1,0 +1,26 @@
+{
+  "name": "@o-w-o/lib",
+  "version": "1.0.4",
+  "description": "o-w-o's lib",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "author": "symbols@dingtalk.com",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "camelcase-keys": "^6.1.2",
+    "file-saver": "^2.0.2",
+    "ix": "^3.0.2",
+    "lodash": "^4.17.15",
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}

@@ -1,53 +1,43 @@
 {
-  "name": "@o-w-o/lab",
+  "name": "@o-w-o/ink",
   "version": "1.0.0",
-  "description": "o-w-o/lab 实验室",
+  "description": "o-w-o's app and lib packages.",
+  "private": true,
+  "workspaces": [
+    "packages/@o-w-o/*",
+    "app/*"
+  ],
   "scripts": {
-    "dev": "NODE_ENV=development npm run dev:server & npm run dev:client",
-    "dev:ms": "set NODE_ENV=development && npm run dev:ms:server & npm run dev:ms:client",
-    "dev:server": "cd ./server && npm run dev:start",
-    "dev:client": "cd ./client && npm run start",
-    "dev:ms:server": "cd ./server && npm run dev:start",
-    "dev:ms:client": "cd ./client && npm run start",
-    "script:version": "node ./script/version.js",
-    "script:port": "node ./script/port.js",
-    "script:npmrc": "node ./script/npmrc.js",
-    "build:client": "cd ./client && npm ci && npm run build",
-    "build:proxy": "cd ./proxy && npm ci && npm run build",
-    "cp:proxy": "cp ./proxy/package.json ./dist",
-    "release:clean": "rimraf dist && mkdir dist",
-    "release:debug": "npm run release:clean && npm run cp:proxy",
-    "release": "npm run release:clean && npm run cp:proxy && npm run build:client && npm run build:proxy"
+    "bootstrap": "lerna bootstrap",
+    "release:lint": "lerna run lint",
+    "release:test": "lerna run test",
+    "release:build": "lerna run build",
+    "release:prepare": "npm run release:lint && npm run release:test && npm run release:build",
+    "release:publish": "lerna publish",
+    "release:publish:changelog": "lerna publish --conventional-commits",
+    "release": "npm run release:prepare && npm run release:publish",
+    "release:changelog": "npm run release:prepare && npm run release:publish:changelog",
+    "changelog:init": "lerna exec --concurrency 1 --stream -- 'conventional-changelog --preset angular --release-count 0 --commit-path $PWD --pkg $PWD/package.json --outfile $PWD/CHANGELOG.md --verbose --lerna-package $LERNA_PACKAGE_NAME'",
+    "import": "lerna import",
+    "clean": "rimraf packages/test/* packages/**/temp/*"
   },
-  "dependencies": {
-    "execa": "^3.4.0",
-    "inquirer": "^7.0.0",
-    "lodash": "^4.17.15",
-    "registry-auth-token": "^4.0.0",
-    "rimraf": "^3.0.0",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.3",
-    "yargs": "^15.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "@commitlint/config-lerna-scopes": "^8.2.0",
-    "@commitlint/prompt": "^8.2.0",
-    "@o-w-o/eslint-config": "^1.0.0-alpha.0",
-    "@types/inquirer": "^6.5.0",
-    "@types/yargs": "^13.0.3",
-    "commitizen": "^4.0.3",
-    "conventional-changelog": "^3.1.15",
-    "conventional-changelog-cli": "^2.0.28",
-    "danger": "^9.2.9",
-    "eslint": "^6.7.2",
-    "eslint-formatter-friendly": "^7.0.0",
-    "husky": "^3.1.0",
-    "lerna": "^3.19.0",
-    "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
-    "semver": "^6.3.0"
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@commitlint/config-lerna-scopes": "^8.1.0",
+    "@commitlint/prompt": "^8.1.0",
+    "@o-w-o/linter": "^1.0.1",
+    "commitizen": "^4.1.0",
+    "conventional-changelog": "^3.1.10",
+    "conventional-changelog-cli": "^2.0.0",
+    "husky": "^4.2.0",
+    "lerna": "^3.20.0",
+    "lint-staged": "^10.2.0",
+    "rimraf": "^3.0.0",
+    "semver": "^7.3.0",
+    "ts-node": "^8.10.0",
+    "typescript": "^3.8.0"
   },
   "husky": {
     "hooks": {
@@ -56,7 +46,11 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
+    "packages/@o-w-o/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
+      "prettier --write",
+      "git add"
+    ],
+    "app/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
       "prettier --write",
       "git add"
     ]
@@ -70,13 +64,8 @@
     "node": ">=8.0.0"
   },
   "repository": {
-    "type": "git",
-    "url": "git@github.com:o-w-o/ink.git"
+    "url": "https://github.com/o-w-o/ink.git"
   },
-  "author": "symbols@o-w-o.ink",
-  "eslintIgnore": [
-    "coverage",
-    "dist"
-  ],
+  "author": "symbols@dingtalk.com",
   "license": "MIT"
 }

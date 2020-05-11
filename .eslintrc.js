@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: [
-    "@o-w-o",
+    require.resolve("@o-w-o/linter/.eslintrc"),
   ],
   rules: {
     "prettier/prettier": "warn",
@@ -12,10 +12,5 @@ module.exports = {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/camelcase": 0
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "legacyDecorators": true
-    }
   }
 };

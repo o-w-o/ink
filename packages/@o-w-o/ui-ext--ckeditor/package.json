@@ -1,0 +1,14 @@
+{
+  "name": "@o-w-o/ui-ext--ckeditor",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-balloon-block": "^17.0.0",
+    "@ckeditor/ckeditor5-react": "^2.1.0",
+    "@o-w-o/linter": "^1.0.0",
+    "@o-w-o/ui": "^1.0.0"
+  },
+  "devDependencies": {
+    "@ckeditor/ckeditor5-inspector": "^1.5.0",
+    "@types/ckeditor__ckeditor5-core": "^11.0.2"
+  }
+}

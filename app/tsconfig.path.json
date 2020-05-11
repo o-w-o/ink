@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@o-w-o/stores/*": ["src/store/modules/*"],
+      "@o-w-o/templates/*": ["src/template/modules/*"],
+      "@o-w-o/views/*": ["src/view/modules/*"]
+    }
+  }
+}

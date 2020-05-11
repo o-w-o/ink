@@ -1,0 +1,23 @@
+{
+  "name": "@o-w-o/lib-ext--client-dev",
+  "version": "1.0.0",
+  "description": "o-w-o's client's lib ext",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc --outDir dist"
+  },
+  "author": "symbols@dingtalk.com",
+  "license": "MIT",
+  "dependencies": {
+    "@o-w-o/lib": "^1.0.0",
+    "react": "^16.13.0",
+    "@welldone-software/why-did-you-render": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.35",
+    "typescript": "^3.8.3"
+  }
+}

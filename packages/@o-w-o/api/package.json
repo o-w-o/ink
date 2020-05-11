@@ -1,0 +1,35 @@
+{
+  "name": "@o-w-o/api",
+  "version": "1.0.1",
+  "description": "o-w-o's api",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "build": "npx tsc"
+  },
+  "keywords": [
+    "o-w-o",
+    "api"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "index.ts",
+    "index.d.ts",
+    "index.js"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@o-w-o/lib": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  }
+}

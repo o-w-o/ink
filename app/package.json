@@ -1,0 +1,41 @@
+{
+  "name": "@o-w-o/app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@o-w-o/api": "^1.0.0",
+    "@o-w-o/lib": "^1.0.0",
+    "@o-w-o/lib-ext--client": "^1.0.1",
+    "@o-w-o/lib-ext--client-dev": "^1.0.0",
+    "@o-w-o/lib-ext--client-store": "^1.0.2",
+    "@o-w-o/lib-ext--server": "^1.0.0",
+    "@o-w-o/ui": "^1.0.0"
+  },
+  "devDependencies": {
+    "@o-w-o/linter": "^1.0.0"
+  },
+  "scripts": {
+    "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired start",
+    "analyze:ms": "set BUNDLE_VISUALIZE=1 && react-app-rewired start",
+    "lint": "npx prettier --write src/**/*.{ts,tsx}",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom --watchAll=false --passWithNoTests",
+    "test:watch": "react-scripts test",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
+    "eject": "react-scripts eject"
+  },
+  "config-overrides-path": "cra-overrides",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

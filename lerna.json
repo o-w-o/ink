@@ -1,0 +1,27 @@
+{
+  "packages": [
+    "packages/@o-w-o/*"
+  ],
+  "version": "independent",
+  "npmClient": "npm",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ],
+      "message": "chore($release): :bookmark: %s packages has published!",
+      "version": {
+        "allowBranch": ["master"]
+      }
+    },
+    "bootstrap": {
+      "npmClientArgs": [],
+      "hoist": []
+    }
+  }
+}

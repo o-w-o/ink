@@ -1,0 +1,51 @@
+{
+  "name": "@o-w-o/lib-ext--server",
+  "version": "1.0.0",
+  "description": "o-w-o's server's lib ext",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "npx prettier --write src/**/*.ts",
+    "build": "npx tsc",
+    "start": "nodemon index.js",
+    "dev:start": "nodemon --exec ts-node -- ./src/index.ts",
+    "test": "npm run build && lab -v **/*.test.js"
+  },
+  "author": "symbols@dingtalk.com",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/good": "^9.0.0",
+    "@hapi/h2o2": "^9.0.1",
+    "@hapi/hapi": "^19.1.0",
+    "@hapi/hoek": "^9.0.0",
+    "@hapi/inert": "^6.0.0",
+    "@hapi/joi": "^17.1.0",
+    "@hapi/nes": "^12.0.0",
+    "@hapi/vision": "^6.0.0",
+    "@hapi/wreck": "^17.0.0",
+    "hapi-pino": "^8.0.0",
+    "qs": "^6.9.1",
+    "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "@hapi/code": "^8.0.0",
+    "@hapi/lab": "^22.0.0",
+    "@types/hapi": "^18.0.3",
+    "@types/hapi-pino": "^8.0.0",
+    "@types/hapi__h2o2": "^8.3.0",
+    "@types/hapi__hapi": "^19.0.0",
+    "@types/hapi__inert": "^5.2.0",
+    "@types/hapi__joi": "^17.1.0",
+    "@types/hapi__nes": "^11.0.3",
+    "@types/hapi__vision": "^5.5.1",
+    "@types/nedb": "^1.8.9",
+    "@types/node": "^12.12.15",
+    "@types/pino": "^6.0.0",
+    "@types/qs": "^6.9.0",
+    "@types/tape": "^4.13.0"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@o-w-o/lib-ext--client",
+  "version": "1.0.1",
+  "description": "o-w-o's client's lib ext",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "author": "symbols@dingtalk.com",
+  "license": "MIT",
+  "dependencies": {
+    "ajax-hook": "^1.8.3",
+    "customize-cra": "^1.0.0-alpha.0",
+    "react-app-rewired": "^2.1.5",
+    "react-scripts": "^3.4.0",
+    "webpack-bundle-analyzer": "^3.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
