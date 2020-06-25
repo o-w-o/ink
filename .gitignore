@@ -71,7 +71,7 @@ typings/
 # VSCode
 .vscode/
 
-package-lock.josn
+package-lock.json
 packages/**/package-lock.json
 
 !app/package-lock.json
