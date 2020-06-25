@@ -6,21 +6,23 @@
     "@o-w-o/api": "^1.0.0",
     "@o-w-o/lib": "^1.0.0",
     "@o-w-o/lib-ext--client": "^1.0.2",
-    "@o-w-o/lib-ext--server": "^1.0.0",
+    "@o-w-o/lib-ext--server": "^1.0.2",
     "@o-w-o/ui": "^1.0.0"
   },
   "devDependencies": {
     "@o-w-o/linter": "^1.0.0",
     "@o-w-o/lib-ext--client-dev": "^1.0.0",
-    "@o-w-o/lib-ext--server-dev": "^1.0.0"
+    "@o-w-o/lib-ext--server-dev": "^1.0.1"
   },
   "scripts": {
-    "boot:dev": "ts-node ./server.ts",
     "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired start",
     "analyze:ms": "set BUNDLE_VISUALIZE=1 && react-app-rewired start",
     "lint": "npx prettier --write src/**/*.{ts,tsx}",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start:server": "ts-node ./server.ts",
+    "start:client": "react-app-rewired start",
+    "build:server": "tsc ./server.ts",
+    "build:client": "react-app-rewired build",
+    "build": "npm run build:server && npm run build:client",
     "test": "react-app-rewired test --env=jsdom --watchAll=false --passWithNoTests",
     "test:watch": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
