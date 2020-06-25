@@ -9,6 +9,7 @@ import { Authentication } from "./Authentication";
 import { Exception } from "./Exception";
 import { Extra } from "./Extra";
 
+import Bg from "../../assets/bg.png";
 import Bg1 from "../../assets/bg1.png";
 import Bg2 from "../../assets/bg2.png";
 import Bg3 from "../../assets/bg3.png";
@@ -16,14 +17,14 @@ import Bg3 from "../../assets/bg3.png";
 export default {
   title: "Paper",
   component: PaperO,
-  decorators: [withKnobs],
+  decorators: [withKnobs]
 };
 
 const navigationHomeProps: NavigationProps = {
   enableAvatar: true,
   avatar: {
     src: logo,
-    active: false,
+    active: false
   },
   enableController: true,
   controllerStatus: true,
@@ -31,55 +32,67 @@ const navigationHomeProps: NavigationProps = {
     {
       title: "目录",
       icon: Toc,
-      active: false,
+      active: false
     },
     {
       title: "联系",
       icon: BubbleChart,
-      active: false,
-    },
+      active: false
+    }
   ],
   bottomButtons: [
     {
       title: "控制",
       icon: Apps,
-      active: false,
+      active: false
     },
     {
       title: "设置",
       icon: Settings,
-      active: false,
+      active: false
     },
     {
       title: "关于",
       icon: Info,
-      active: false,
-    },
-  ],
+      active: false
+    }
+  ]
 };
 
 const navigationExtraProps: NavigationProps = {
   enableAvatar: true,
   avatar: {
     src: logo,
-    active: false,
+    active: false
   },
   enableController: true,
   controllerStatus: false,
   buttons: [],
-  bottomButtons: [],
+  bottomButtons: []
 };
 
 export const 主页 = () => {
-  return <PaperO bg={Bg1} nav={<Navigation {...navigationHomeProps} />} content={<div />} />;
+  return (
+    <PaperO
+      style={{ bg: Bg, cover: Bg1 }}
+      nav={<Navigation {...navigationHomeProps} />}
+      content={<div />}
+    />
+  );
 };
 
 export const 授权页 = () => {
   return (
     <PaperO
       nav={<Navigation {...navigationExtraProps} />}
-      bg={Bg2}
-      content={<Extra content={<div />} loading={true} loadingContent={<Authentication />} />}
+      style={{ bg: Bg, cover: Bg2 }}
+      content={
+        <Extra
+          content={<div />}
+          loading={true}
+          loadingContent={<Authentication />}
+        />
+      }
     />
   );
 };
@@ -88,8 +101,14 @@ export const 异常页 = () => {
   return (
     <PaperO
       nav={<Navigation {...navigationExtraProps} />}
-      bg={Bg3}
-      content={<Extra content={<div />} loading={true} loadingContent={<Exception />} />}
+      style={{ bg: Bg, cover: Bg3 }}
+      content={
+        <Extra
+          content={<div />}
+          loading={true}
+          loadingContent={<Exception />}
+        />
+      }
     />
   );
 };

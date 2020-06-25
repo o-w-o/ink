@@ -5,7 +5,7 @@ import {
   tokenMiddlewareHooks,
   tokensDbModule
 } from "./modules/tokens";
-import { IEpicInitializer } from "@o-w-o/lib-ext--client-store";
+import { IEpicInitializer } from "@o-w-o/lib-ext--client";
 import { triggerCacheStore } from "./emitter";
 
 RxDB.plugin(require("pouchdb-adapter-idb"));

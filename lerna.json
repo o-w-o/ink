@@ -21,7 +21,9 @@
     },
     "bootstrap": {
       "npmClientArgs": [],
-      "hoist": []
+      "hoist": [
+        "typescript"
+      ]
     }
   }
 }

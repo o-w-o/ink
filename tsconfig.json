@@ -5,6 +5,10 @@
     "jsx": "react",
     "module": "commonjs",
     "target": "es5",
+    "lib": [
+      "esnext",
+      "es6"
+    ],
     "allowJs": false,
     "noUnusedLocals": true,
     "removeComments": true,

@@ -3,25 +3,23 @@ import { Box } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { PaperAvatarProps } from "../Avatar/PaperAvatar";
 
-import Bg from "../../assets/bg.png";
-import Bg1 from "../../assets/bg1.png";
-
-export interface PaperStyleProps {
+export interface PaperOStyleProps {
   bg?: string;
+  cover?: string;
 }
 
-const useStyle = makeStyles<Theme, PaperStyleProps>((theme) =>
+const useStyle = makeStyles<Theme, PaperOStyleProps>((theme) =>
   createStyles({
-    paperWrapper: {
+    paperWrapper: (props) => ({
       height: "100vh",
       width: "100vw",
       backgroundColor: theme.palette.grey.A100,
-      backgroundImage: `url(${Bg})`,
+      backgroundImage: `url(${props.bg})`,
       backgroundSize: "cover",
       position: "absolute",
       top: 0,
       left: 0,
-    },
+    }),
     paperNav: {
       width: 300,
       paddingRight: 36,
@@ -42,7 +40,7 @@ const useStyle = makeStyles<Theme, PaperStyleProps>((theme) =>
       width: "28vw",
       content: "''",
       backgroundColor: theme.palette.grey["100"],
-      backgroundImage: `url(${props.bg})`,
+      backgroundImage: `url(${props.cover})`,
       backgroundSize: "cover",
       boxShadow: theme.shadows[1],
       zIndex: 8,
@@ -51,7 +49,7 @@ const useStyle = makeStyles<Theme, PaperStyleProps>((theme) =>
   })
 );
 
-export interface PaperProps {
+export interface PaperOProps {
   enableAvatar?: boolean;
   avatar?: PaperAvatarProps;
   enableController?: boolean;
@@ -59,24 +57,30 @@ export interface PaperProps {
   nav: JSX.Element;
   content: JSX.Element;
   extraContent?: JSX.Element;
-  bg?: string;
+  style?: PaperOStyleProps;
 }
 
-const defaultPaperProps: PaperProps = {
+const defaultPaperProps: PaperOProps = {
   enableAvatar: false,
   nav: <div />,
   content: <div />,
-  bg: Bg1,
 };
 
-export const PaperO = React.memo<PaperProps>((props: PaperProps = defaultPaperProps) => {
-  const classes = useStyle({ bg: props.bg });
+export const PaperO = React.memo<PaperOProps>(
+  (props: PaperOProps = defaultPaperProps) => {
+    const classes = useStyle(props.style);
 
-  return (
-    <Box display="flex" alignItems="center" justifyContent="space-between" className={classes.paperWrapper}>
-      <Box className={classes.paperContent}>{props.content}</Box>
-      <Box className={classes.paperNav}>{props.nav}</Box>
-      <Box className={classes.paperHelper}></Box>
-    </Box>
-  );
-});
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        className={classes.paperWrapper}
+      >
+        <Box className={classes.paperContent}>{props.content}</Box>
+        <Box className={classes.paperNav}>{props.nav}</Box>
+        <Box className={classes.paperHelper}></Box>
+      </Box>
+    );
+  }
+);

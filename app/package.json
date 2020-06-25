@@ -5,16 +5,17 @@
   "dependencies": {
     "@o-w-o/api": "^1.0.0",
     "@o-w-o/lib": "^1.0.0",
-    "@o-w-o/lib-ext--client": "^1.0.1",
-    "@o-w-o/lib-ext--client-dev": "^1.0.0",
-    "@o-w-o/lib-ext--client-store": "^1.0.2",
+    "@o-w-o/lib-ext--client": "^1.0.2",
     "@o-w-o/lib-ext--server": "^1.0.0",
     "@o-w-o/ui": "^1.0.0"
   },
   "devDependencies": {
-    "@o-w-o/linter": "^1.0.0"
+    "@o-w-o/linter": "^1.0.0",
+    "@o-w-o/lib-ext--client-dev": "^1.0.0",
+    "@o-w-o/lib-ext--server-dev": "^1.0.0"
   },
   "scripts": {
+    "boot:dev": "ts-node ./server.ts",
     "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired start",
     "analyze:ms": "set BUNDLE_VISUALIZE=1 && react-app-rewired start",
     "lint": "npx prettier --write src/**/*.{ts,tsx}",

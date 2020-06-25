@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": [
       "dom",
       "dom.iterable",
@@ -15,9 +17,8 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
+    "removeComments": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react"

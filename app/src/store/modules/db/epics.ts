@@ -1,7 +1,7 @@
 import { ActionsObservable, combineEpics } from "redux-observable";
 import { filter, mergeMap, tap } from "rxjs/operators";
 
-import { IReducerAction } from "@o-w-o/lib-ext--client-store";
+import { IReducerAction } from "@o-w-o/lib-ext--client";
 import { dbHelper } from "./lib";
 import {
   dispatchCacheStore,

@@ -8,7 +8,8 @@
     "app/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "link": "lerna link",
+    "bootstrap": "lerna bootstrap --hoist",
     "release:lint": "lerna run lint",
     "release:test": "lerna run test",
     "release:build": "lerna run build",
@@ -37,7 +38,7 @@
     "rimraf": "^3.0.0",
     "semver": "^7.3.0",
     "ts-node": "^8.10.0",
-    "typescript": "^3.8.0"
+    "typescript": "^3.9.2"
   },
   "husky": {
     "hooks": {

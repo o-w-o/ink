@@ -29,21 +29,27 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
     "strict": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@o-w-o/ui": [
+        "src"
+      ]
+    }
   },
   "include": [
     "src/**/*",
-    "src/image.d.ts"
+    "src/image.d.ts",
+    "stories/**/*"
   ],
   "exclude": [
     "node_modules",
     "build",
     "scripts",
-    "*/stories.ts"
+    "dist"
   ]
 }

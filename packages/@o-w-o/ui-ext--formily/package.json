@@ -2,8 +2,12 @@
   "name": "@o-w-o/ui-ext-formily",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "lib",
-  "module": "esm",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/o-w-o/ink.git"
@@ -12,20 +16,31 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "build": "ts-node --project ../../../tsconfig.build.json build.ts"
+    "build": "npx tsc -p ../../../tsconfig.build.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@o-w-o/ui": "^1.0.0",
-    "@o-w-o/lib": "^1.0.0",
     "@formily/react-schema-renderer": "^1.1.3",
     "@formily/react-shared-components": "^1.1.3",
-    "@formily/shared": "^1.1.3"
+    "@o-w-o/lib": "^1.0.0",
+    "@o-w-o/ui": "^1.0.0",
+    "typescript": "^3.9.2"
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "prettier": "^2.0.5"
+    "@o-w-o/linter": "^1.0.0",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-info": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
+    "react-scripts": "^3.4.1",
+    "react-eva": "^1.1.7"
   }
 }

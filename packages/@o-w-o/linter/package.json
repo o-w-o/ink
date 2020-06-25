@@ -34,8 +34,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-unicorn": "^16.0.0",
@@ -47,11 +47,10 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.1.0",
-    "stylelint-order": "^4.0.0"
+    "stylelint-order": "^4.0.0",
+    "typescript": "^3.9.2"
   },
-  "peerDependencies": {
-    "typescript": "^3.8.3"
-  },
+  "peerDependencies": {},
   "engines": {
     "node": ">= 8.0.0"
   }

@@ -6,7 +6,7 @@ import {
   storeToolkit,
   preloaderState,
   routerReducer
-} from "@o-w-o/lib-ext--client-store";
+} from "@o-w-o/lib-ext--client";
 
 import { dbStore } from "./modules/db";
 
@@ -27,4 +27,4 @@ export const store = history => {
     .buildStore();
 };
 
-export { history } from "@o-w-o/lib-ext--client-store";
+export { history } from "@o-w-o/lib-ext--client";
