@@ -1,13 +1,14 @@
 {
   "name": "@o-w-o/ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "url": "https://github.com/o-w-o/ink.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",

@@ -3,26 +3,30 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@o-w-o/lib-ext--server": "^1.0.2"
+  },
+  "optionalDependencies": {
     "@o-w-o/api": "^1.0.0",
     "@o-w-o/lib": "^1.0.0",
     "@o-w-o/lib-ext--client": "^1.0.2",
-    "@o-w-o/lib-ext--server": "^1.0.2",
-    "@o-w-o/ui": "^1.0.0"
+    "@o-w-o/lib-ext--client-dev": "^1.0.0",
+    "@o-w-o/linter": "^1.0.0",
+    "@o-w-o/ui": "^1.0.2"
   },
   "devDependencies": {
-    "@o-w-o/linter": "^1.0.0",
-    "@o-w-o/lib-ext--client-dev": "^1.0.0",
     "@o-w-o/lib-ext--server-dev": "^1.0.1"
   },
   "scripts": {
     "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired start",
     "analyze:ms": "set BUNDLE_VISUALIZE=1 && react-app-rewired start",
     "lint": "npx prettier --write src/**/*.{ts,tsx}",
-    "start:server": "ts-node ./server.ts",
+    "clear": "npx rimraf ./node_modules",
+    "bootstrap": "sh ./script/server.sh",
+    "start:server": "nodemon ./server.js",
     "start:client": "react-app-rewired start",
-    "build:server": "tsc ./server.ts",
+    "build:server": "tsc server.ts --outDir ../dist",
     "build:client": "react-app-rewired build",
-    "build": "npm run build:server && npm run build:client",
+    "build": "npm run build:client && npm run build:server",
     "test": "react-app-rewired test --env=jsdom --watchAll=false --passWithNoTests",
     "test:watch": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",

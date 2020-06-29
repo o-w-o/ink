@@ -1,5 +1,9 @@
 import React from "react";
-import { Navigation, NavigationProps, PaperO } from "@o-w-o/ui";
+import {
+  Navigation,
+  NavigationProps
+} from "@o-w-o/ui/dist/components/Navigation/Navigation";
+import { PaperO } from "@o-w-o/ui/dist/components/Layout/PaperO";
 import { Apps, BubbleChart, Info, Settings, Toc } from "@material-ui/icons";
 
 import Bg1 from "../assets/bg1.png";
@@ -46,10 +50,6 @@ const navigationHomeProps: NavigationProps = {
 
 export default function Home() {
   return (
-    <PaperO
-      bg={Bg1}
-      nav={<Navigation {...navigationHomeProps} />}
-      content={<div />}
-    />
+    <PaperO nav={<Navigation {...navigationHomeProps} />} content={<div />} />
   );
 }

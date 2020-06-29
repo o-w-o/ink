@@ -2,7 +2,7 @@
   "extends": "./tsconfig.path.json",
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "lib": [
       "dom",
@@ -25,6 +25,7 @@
   },
   "include": [
     "src",
+    "server.ts",
     "index.d.ts"
   ]
 }

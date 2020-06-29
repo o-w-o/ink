@@ -7,5 +7,3 @@ export * from "./components/Layout/Exception";
 export * from "./components/Layout/Extra";
 export * from "./components/Layout/PaperI";
 export * from "./components/Layout/PaperO";
-export * from "./components/Form/Form";
-export * from "./components/Form/FormItem";

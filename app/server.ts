@@ -1,4 +1,4 @@
-import { Proxy, ClientModule, ServerModule } from "@o-w-o/lib-ext--server";
+import { ClientModule, Proxy, ServerModule } from "@o-w-o/lib-ext--server";
 
 process.on("unhandledRejection", err => {
   console.log(err);
