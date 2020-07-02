@@ -14,6 +14,7 @@ export type DatePickerProps = IFormItemIProps<
 
 export const DatePicker = React.memo<DatePickerProps>(props => {
   return (
+    // @ts-ignore
     <FormItem {...props} component={FormItemComponent} adaptors={adaptors} />
   );
 });

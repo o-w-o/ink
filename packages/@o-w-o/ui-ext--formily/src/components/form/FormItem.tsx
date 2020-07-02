@@ -1,5 +1,5 @@
 import React from "react";
-import { IFieldStateProps } from "@formily/core";
+import { IFieldState } from "@formily/core";
 import { Field, IFieldAPI } from "@formily/react";
 import { log } from "@formily/shared";
 
@@ -25,8 +25,8 @@ export class FormItemIOAdaptor<Input, Output extends IFormItemOProps> {
   constructor(
     name: string,
     op: IFormItemIOAdaptorOp<Input, Output>,
-    target?,
-    dep?
+    target?: any,
+    dep?: any
   ) {
     this.name = name;
     this.op = op;
@@ -47,7 +47,7 @@ export class FormItemIO<Input, Output extends IFormItemOProps> {
   public registerAdaptor(adapter: FormItemIOAdaptor<Input, Output>) {
     this.adaptors.push(adapter);
   }
-  public exec(input: Input, api): Partial<Output> {
+  public exec(input: Input, api: IFieldAPI): Partial<Output> {
     return this.adaptors.reduce<Partial<Output>>(
       (previousValue, currentValue) => {
         return {
@@ -61,7 +61,7 @@ export class FormItemIO<Input, Output extends IFormItemOProps> {
 }
 
 export type IFormItemIProps<T extends IFormItemOProps> = Partial<IFieldAPI> &
-  IFieldStateProps<T> & {
+  Partial<IFieldState<T>> & {
     triggerType?: "onChange" | "onBlur" | "none";
     getValueFromEvent?: (...args: any[]) => any;
     children?: React.ReactElement | ((api: IFieldAPI) => React.ReactElement);
@@ -77,7 +77,7 @@ export class FormItem<T extends IFormItemOProps> extends React.Component<
 > {
   io = new FormItemIO<IFormItemIProps<T>, T>();
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.renderComponent = this.renderComponent.bind(this);

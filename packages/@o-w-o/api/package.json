@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
-    "build": "npx tsc"
+    "build": "tsc --skipLibCheck"
   },
   "keywords": [
     "o-w-o",
@@ -27,7 +27,7 @@
     "@o-w-o/lib": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.2"
   },
   "engines": {
     "node": ">= 8.0.0"

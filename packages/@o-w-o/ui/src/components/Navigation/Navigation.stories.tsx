@@ -2,7 +2,14 @@ import React from "react";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 
 import logo from "../../assets/logo.png";
-import { Apps, BubbleChart, Info, Settings, Toc, ViewCarousel } from "@material-ui/icons";
+import {
+  Apps,
+  BubbleChart,
+  Info,
+  Settings,
+  Toc,
+  ViewCarousel
+} from "@material-ui/icons";
 
 import { Navigation, NavigationProps } from "./Navigation";
 
@@ -10,7 +17,7 @@ export default {
   title: "Navigation",
   component: Navigation,
   decorators: [withKnobs],
-  includeStories: ["导航"],
+  includeStories: ["导航"]
 };
 
 export function navigationProps(): NavigationProps {
@@ -18,7 +25,7 @@ export function navigationProps(): NavigationProps {
     enableAvatar: boolean("enableAvatar", true),
     avatar: {
       src: logo,
-      active: false,
+      active: false
     },
     enableController: boolean("enableController", true),
     controllerStatus: boolean("controllerStatus", true),
@@ -26,36 +33,36 @@ export function navigationProps(): NavigationProps {
       {
         title: "目录",
         icon: Toc,
-        active: false,
+        active: false
       },
       {
         title: "背景",
         icon: ViewCarousel,
-        active: false,
+        active: false
       },
       {
         title: "联系",
         icon: BubbleChart,
-        active: false,
-      },
+        active: false
+      }
     ],
     bottomButtons: [
       {
         title: "控制",
         icon: Apps,
-        active: false,
+        active: false
       },
       {
         title: "设置",
         icon: Settings,
-        active: false,
+        active: false
       },
       {
         title: "关于",
         icon: Info,
-        active: false,
-      },
-    ],
+        active: false
+      }
+    ]
   };
 }
 

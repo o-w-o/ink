@@ -11,29 +11,25 @@
     "dist"
   ],
   "scripts": {
-    "build": "npx tsc"
+    "build": "tsc --skipLibCheck"
   },
   "author": "symbols@dingtalk.com",
   "license": "MIT",
   "dependencies": {
     "@o-w-o/lib": "^1.0.4",
-    "@reduxjs/toolkit": "^1.3.0",
+    "@reduxjs/toolkit": "^1.4.0",
     "connected-react-router": "^6.8.0",
     "history": "^4.10.0",
     "pouchdb-adapter-idb": "^7.2.1",
     "react-redux": "^7.2.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "redux-observable": "^1.2.0",
-    "rxdb": "^8.9.0",
-    "ajax-hook": "^1.8.3",
-    "customize-cra": "^1.0.0-alpha.0",
+    "rxdb": "^9.3.0",
+    "ajax-hook": "^2.0.0",
+    "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.1.5",
-    "react-scripts": "^3.4.0",
-    "typescript": "^3.9.2",
-    "webpack-bundle-analyzer": "^3.7.0"
+    "react-scripts": "^3.4.0"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

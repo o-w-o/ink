@@ -2,7 +2,7 @@ import React from "react";
 import { Button, TextField } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { PaperAvatarProps } from "../Avatar/PaperAvatar";
-import {NavigationProps} from "../Navigation/Navigation";
+import { NavigationProps } from "../Navigation/Navigation";
 import logo from "../../assets/logo.png";
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -12,14 +12,14 @@ const useStyle = makeStyles((theme: Theme) =>
       height: "calc(100% - 128px)",
       padding: 64,
       "& .MuiTextField-root": {
-        margin: `${theme.spacing(2)}px 0`,
+        margin: `${theme.spacing(2)}px 0`
       },
       "& *": {
-        fontFamily: "Source Han Serif CN",
+        fontFamily: "Source Han Serif CN"
       },
       "& h1": {
-        color: theme.palette.error.dark,
-      },
+        color: theme.palette.error.dark
+      }
     },
     exceptionPanel: {
       width: 188,
@@ -34,8 +34,8 @@ const useStyle = makeStyles((theme: Theme) =>
         margin: 12,
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-      },
+        alignItems: "center"
+      }
     },
     exceptionAction: {
       position: "absolute",
@@ -44,7 +44,7 @@ const useStyle = makeStyles((theme: Theme) =>
       textDecoration: "underline",
       fontSize: theme.typography.pxToRem(16),
       color: theme.palette.error.dark,
-      fontFamily: "Source Han Serif CN",
+      fontFamily: "Source Han Serif CN"
     },
     exceptionController: {
       backgroundColor: theme.palette.common.white,
@@ -52,9 +52,9 @@ const useStyle = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1.5),
       "&.--active": {
         color: theme.palette.common.white,
-        backgroundColor: theme.palette.error.dark,
-      },
-    },
+        backgroundColor: theme.palette.error.dark
+      }
+    }
   })
 );
 
@@ -66,39 +66,46 @@ export interface ExceptionProps {
 }
 
 const defaultExceptionProps: ExceptionProps = {
-  email: "",
+  email: ""
 };
 
-export const Exception = React.memo((props: ExceptionProps = defaultExceptionProps) => {
-  const classes = useStyle();
+export const Exception = React.memo(
+  (props: ExceptionProps = defaultExceptionProps) => {
+    const classes = useStyle();
 
-  return (
-    <form className={classes.exceptionWrapper} noValidate autoComplete="off">
-      <h1>异常</h1>
-      <div>
-        <TextField label="原因" fullWidth variant="outlined" defaultValue="IP 禁止登录！" onChange={console.log} />
-      </div>
+    return (
+      <form className={classes.exceptionWrapper} noValidate autoComplete="off">
+        <h1>异常</h1>
+        <div>
+          <TextField
+            label="原因"
+            fullWidth
+            variant="outlined"
+            defaultValue="IP 禁止登录！"
+            onChange={console.log}
+          />
+        </div>
 
-      <Button className={classes.exceptionAction}>
-        <div>返回</div>
-      </Button>
-    </form>
-  );
-});
-
+        <Button className={classes.exceptionAction}>
+          <div>返回</div>
+        </Button>
+      </form>
+    );
+  }
+);
 
 export const generateExceptionPaperProps = () => {
   const navigationExtraProps: NavigationProps = {
     enableAvatar: true,
     avatar: {
       src: logo,
-      active: false,
+      active: false
     },
     enableController: true,
     controllerStatus: false,
     buttons: [],
-    bottomButtons: [],
+    bottomButtons: []
   };
 
   return navigationExtraProps;
-}
+};

@@ -9,17 +9,18 @@ import { proxyUri } from "../../utils/proxy";
 import { ENV, portConfig } from "../../config";
 
 export class ServerModule implements IServerModule {
-  static get defaultOptions(): IServerModuleOptions {
+  get defaultOptions(): IServerModuleOptions {
     return {
       baseUri: `http://localhost:${portConfig.server[ENV]}`,
       namespace: "api"
     };
   }
+
   extraOptions: IProxyOptions = {};
 
   options: IServerModuleOptions;
   registerOptions(options?: IServerModuleOptions) {
-    this.options = Object.assign({}, ServerModule.defaultOptions, options);
+    this.options = Object.assign({}, this.defaultOptions, options);
     return this;
   }
 

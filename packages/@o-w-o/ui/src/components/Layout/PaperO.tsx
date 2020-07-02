@@ -8,9 +8,9 @@ export interface PaperOStyleProps {
   cover?: string;
 }
 
-const useStyle = makeStyles<Theme, PaperOStyleProps>((theme) =>
+const useStyle = makeStyles<Theme, PaperOStyleProps>(theme =>
   createStyles({
-    paperWrapper: (props) => ({
+    paperWrapper: props => ({
       height: "100vh",
       width: "100vw",
       backgroundColor: theme.palette.grey.A100,
@@ -18,11 +18,11 @@ const useStyle = makeStyles<Theme, PaperOStyleProps>((theme) =>
       backgroundSize: "cover",
       position: "absolute",
       top: 0,
-      left: 0,
+      left: 0
     }),
     paperNav: {
       width: 300,
-      paddingRight: 36,
+      paddingRight: 36
     },
     paperContent: {
       height: "calc(95vh - 48px)",
@@ -30,9 +30,9 @@ const useStyle = makeStyles<Theme, PaperOStyleProps>((theme) =>
       backgroundColor: theme.palette.common.white,
       boxShadow: theme.shadows[2],
       margin: "0 48px",
-      borderRadius: 3,
+      borderRadius: 3
     },
-    paperHelper: (props) => ({
+    paperHelper: props => ({
       position: "absolute",
       top: 0,
       left: 128,
@@ -43,9 +43,9 @@ const useStyle = makeStyles<Theme, PaperOStyleProps>((theme) =>
       backgroundImage: `url(${props.cover})`,
       backgroundSize: "cover",
       boxShadow: theme.shadows[1],
-      zIndex: 8,
+      zIndex: 8
     }),
-    paperSlide: {},
+    paperSlide: {}
   })
 );
 
@@ -63,7 +63,7 @@ export interface PaperOProps {
 const defaultPaperProps: PaperOProps = {
   enableAvatar: false,
   nav: <div />,
-  content: <div />,
+  content: <div />
 };
 
 export const PaperO = React.memo<PaperOProps>(

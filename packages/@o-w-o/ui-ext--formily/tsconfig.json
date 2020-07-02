@@ -1,13 +1,36 @@
 {
-  "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./lib"
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "esnext",
+      "dom"
+    ],
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDirs": [
+      "src",
+      "stories"
+    ],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": "."
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "src/**/*",
+    "stories/**/*"
   ],
   "exclude": [
-    "./src/__tests__/*"
+    "node_modules",
+    "build",
+    "scripts",
+    "dist"
   ]
 }

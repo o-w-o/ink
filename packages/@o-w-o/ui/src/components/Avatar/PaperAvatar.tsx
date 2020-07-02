@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     btnWrapper: {
       display: "inline-block",
-      margin: 4,
+      margin: 4
     },
     btn: {
       display: "flex",
@@ -22,28 +22,28 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "hidden",
       [theme.breakpoints.down("xs")]: {
         height: 48,
-        width: 48,
+        width: 48
       },
       "&:hover, &$btnFocusVisible": {
         zIndex: 1,
         backgroundColor: theme.palette.grey.A100,
         "& $btnBackdrop": {
-          opacity: 0.15,
+          opacity: 0.15
         },
         "& $btnMarked": {
-          opacity: 0,
-        },
-      },
+          opacity: 0
+        }
+      }
     },
     avatar: {
       height: "100%",
-      width: "100%",
+      width: "100%"
     },
     btnFocusVisible: {},
     btnActiveBarWrapper: {
       position: "absolute",
       height: "100%",
-      width: "100%",
+      width: "100%"
     },
     btnBar: {
       position: "absolute",
@@ -54,16 +54,16 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[1],
       borderRadius: 3,
       "&:after": {
-        content: "",
+        content: ""
       },
       "&.--left": {
         left: 3,
-        top: 3,
+        top: 3
       },
       "&.--right": {
         right: 3,
-        bottom: 3,
-      },
+        bottom: 3
+      }
     },
     btnBackdrop: {
       position: "absolute",
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: 0,
       backgroundColor: theme.palette.common.black,
       opacity: 0.4,
-      transition: theme.transitions.create("opacity"),
+      transition: theme.transitions.create("opacity")
     },
     btnMarked: {
       height: 3,
@@ -82,8 +82,8 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       bottom: -2,
       left: "calc(50% - 9px)",
-      transition: theme.transitions.create("opacity"),
-    },
+      transition: theme.transitions.create("opacity")
+    }
   })
 );
 
@@ -98,7 +98,11 @@ export const PaperAvatar = React.memo((props: PaperAvatarProps) => {
 
   return (
     <div className={classes.btnWrapper}>
-      <ButtonBase focusRipple className={classes.btn} focusVisibleClassName={classes.btnFocusVisible}>
+      <ButtonBase
+        focusRipple
+        className={classes.btn}
+        focusVisibleClassName={classes.btnFocusVisible}
+      >
         <img src={props.src} alt={props.alt || ""} className={classes.avatar} />
       </ButtonBase>
     </div>

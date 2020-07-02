@@ -11,13 +11,13 @@ export interface PaperButtonXStyleProps {
   direction?: "left" | "right";
 }
 
-const useStyles = makeStyles<Theme, PaperButtonXStyleProps>((theme) =>
+const useStyles = makeStyles<Theme, PaperButtonXStyleProps>(theme =>
   createStyles({
     btnWrapper: () => ({
       display: "inline-block",
-      margin: 4,
+      margin: 4
     }),
-    btn: (props) => ({
+    btn: props => ({
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
@@ -25,30 +25,32 @@ const useStyles = makeStyles<Theme, PaperButtonXStyleProps>((theme) =>
       position: "relative",
       height: 120,
       width: 60,
-      backgroundColor: props.active ? theme.palette.common.white : theme.palette.grey.A100,
+      backgroundColor: props.active
+        ? theme.palette.common.white
+        : theme.palette.grey.A100,
       boxShadow: theme.shadows[2],
       borderRadius: 3,
       [theme.breakpoints.down("xs")]: {
         height: 48,
-        width: 48,
+        width: 48
       },
       "&:hover, &$btnFocusVisible": {
         zIndex: 1,
         backgroundColor: theme.palette.grey.A100,
         background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
         "& $btnTitle": {
-          color: theme.palette.common.black,
+          color: theme.palette.common.black
         },
         "& $btnIcon": {
-          color: theme.palette.grey.A700,
+          color: theme.palette.grey.A700
         },
         "& $btnBackdrop": {
-          opacity: 1,
+          opacity: 1
         },
         "& $btnMarked": {
-          opacity: 0,
-        },
-      },
+          opacity: 0
+        }
+      }
     }),
     btnTitle: {
       width: theme.typography.pxToRem(12),
@@ -56,20 +58,20 @@ const useStyles = makeStyles<Theme, PaperButtonXStyleProps>((theme) =>
       fontFamily: "Source Han Serif CN",
       fontWeight: theme.typography.fontWeightMedium,
       fontSize: theme.typography.pxToRem(12),
-      marginTop: theme.spacing(0.5),
+      marginTop: theme.spacing(0.5)
     },
     btnIcon: {
       color: theme.palette.grey.A700,
       height: 24,
-      width: 24,
+      width: 24
     },
     btnFocusVisible: {},
     btnActiveBarWrapper: {
       position: "absolute",
       height: "100%",
-      width: "100%",
+      width: "100%"
     },
-    btnBar: (props) => ({
+    btnBar: props => ({
       position: "absolute",
       top: 0,
       width: 6,
@@ -79,24 +81,24 @@ const useStyles = makeStyles<Theme, PaperButtonXStyleProps>((theme) =>
       boxShadow: theme.shadows[1],
       borderRadius: 3,
       "&:after": {
-        content: "",
+        content: ""
       },
       "&.--left": {
-        left: 0,
+        left: 0
       },
       "&.--right": {
-        right: 0,
-      },
+        right: 0
+      }
     }),
-    btnBackdrop: (props) => ({
+    btnBackdrop: props => ({
       position: "absolute",
       left: props.direction === "left" ? "unset" : -3,
       right: props.direction === "right" ? "unset" : -3,
       top: 0,
       bottom: 0,
       width: 4,
-      backgroundColor: theme.palette.common.white,
-    }),
+      backgroundColor: theme.palette.common.white
+    })
   })
 );
 
@@ -113,35 +115,41 @@ const defaultPaperButtonProps: PaperButtonXProps = {
   icon: Gamepad,
   color: "#000",
   active: false,
-  direction: "right",
+  direction: "right"
 };
 
-export const PaperButtonX = React.memo((props: PaperButtonXProps = defaultPaperButtonProps) => {
-  const _props = Object.assign({}, defaultPaperButtonProps, props);
+export const PaperButtonX = React.memo(
+  (props: PaperButtonXProps = defaultPaperButtonProps) => {
+    const _props = Object.assign({}, defaultPaperButtonProps, props);
 
-  const classes = useStyles({
-    active: _props.active,
-    direction: _props.direction,
-    color: _props.color,
-  });
+    const classes = useStyles({
+      active: _props.active,
+      direction: _props.direction,
+      color: _props.color
+    });
 
-  const Icon = _props.icon;
+    const Icon = _props.icon;
 
-  return (
-    <div className={classes.btnWrapper}>
-      <ButtonBase focusRipple className={classes.btn} focusVisibleClassName={classes.btnFocusVisible}>
-        <Icon className={classes.btnIcon} />
-        <div className={classes.btnTitle}>{_props.title}</div>
-        <div className={classes.btnBackdrop} />
-        <Switch>
-          <Case condition={_props.direction === "right"}>
-            <Box className={`${classes.btnBar} --right`} />
-          </Case>
-          <Case condition={_props.direction === "left"}>
-            <Box className={`${classes.btnBar} --left`} />
-          </Case>
-        </Switch>
-      </ButtonBase>
-    </div>
-  );
-});
+    return (
+      <div className={classes.btnWrapper}>
+        <ButtonBase
+          focusRipple
+          className={classes.btn}
+          focusVisibleClassName={classes.btnFocusVisible}
+        >
+          <Icon className={classes.btnIcon} />
+          <div className={classes.btnTitle}>{_props.title}</div>
+          <div className={classes.btnBackdrop} />
+          <Switch>
+            <Case condition={_props.direction === "right"}>
+              <Box className={`${classes.btnBar} --right`} />
+            </Case>
+            <Case condition={_props.direction === "left"}>
+              <Box className={`${classes.btnBar} --left`} />
+            </Case>
+          </Switch>
+        </ButtonBase>
+      </div>
+    );
+  }
+);

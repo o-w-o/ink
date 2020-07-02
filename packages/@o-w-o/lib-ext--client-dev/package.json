@@ -7,17 +7,18 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc --outDir dist"
+    "build": "tsc --skipLibCheck"
   },
   "author": "symbols@dingtalk.com",
   "license": "MIT",
   "dependencies": {
     "@o-w-o/lib": "^1.0.0",
     "@welldone-software/why-did-you-render": "^4.0.5",
-    "react": "^16.13.0",
+    "@types/react": "^16.9.41",
+    "@types/react-router": "^5.1.5",
+    "@types/react-router-dom": "^5.1.5",
+    "webpack-bundle-analyzer": "^3.7.0",
     "typescript": "^3.9.2"
   },
-  "devDependencies": {
-    "@types/react": "^16.9.35"
-  }
+  "devDependencies": {}
 }

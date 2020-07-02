@@ -9,6 +9,7 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    "skipLibCheck": true,
     "sourceMap": false,
     "declaration": true,
     "outDir": "dist"

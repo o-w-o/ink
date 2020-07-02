@@ -1,6 +1,16 @@
 {
   "name": "@o-w-o/ui-ext--ckeditor",
   "version": "1.0.0",
+  "description": "o-w-o's lib",
+  "license": "GPLv2",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/index.js"
+  ],
   "scripts": {
     "build:dev": "node_modules/.bin/webpack --mode development",
     "build": "node_modules/.bin/webpack --mode production"

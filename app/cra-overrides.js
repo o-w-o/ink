@@ -96,7 +96,7 @@ module.exports = {
     console.debug("paths ->", paths);
 
     return Object.assign(paths, {
-      appBuild: path.join(__dirname, "../dist/public")
+      appBuild: path.join(__dirname, "dist/public")
     });
   }
 };

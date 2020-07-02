@@ -10,27 +10,46 @@ import {
 } from "../Proxy";
 
 export class ClientModule implements IClientModule {
-  static get defaultOptions(): IClientModuleOptions {
+  get defaultOptions(): IClientModuleOptions {
     return {
       port: portConfig.client[ENV],
       baseUri: `http://localhost:${portConfig.client[ENV]}`,
       namespace: "",
-      distDir: Path.join(__dirname, "../../public"),
+      distDir: this.distDir,
       env: ENV
     };
   }
 
-  extraOptions: IProxyOptions = {
-    routes: {
-      files: {
-        relativeTo: Path.join(__dirname, "../../public")
+  private __distDir__: string = "./public";
+
+  get distDir() {
+    return this.__distDir__;
+  }
+
+  set distDir(dir: string) {
+    Path.isAbsolute(dir)
+      ? (this.__distDir__ = dir)
+      : console.log("warn [distDir] setter ->", dir);
+  }
+
+  get extraOptions(): IProxyOptions {
+    return {
+      routes: {
+        files: {
+          relativeTo: this.distDir
+        }
       }
-    }
-  };
+    };
+  }
+
+  registerStaticPath(path: string) {
+    this.distDir = path;
+    return this;
+  }
 
   options: IClientModuleOptions;
   registerOptions(options?: IClientModuleOptions) {
-    this.options = Object.assign({}, ClientModule.defaultOptions, options);
+    this.options = Object.assign({}, this.defaultOptions, options);
     return this;
   }
 

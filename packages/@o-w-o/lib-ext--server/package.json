@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "lint": "npx prettier --write src/**/*.ts",
-    "build": "npx tsc",
+    "build": "tsc --skipLibCheck",
     "start": "nodemon index.js",
     "test": "lab -v"
   },

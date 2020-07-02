@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme: Theme) =>
       marginLeft: "calc(26vw + 108px)",
       display: "flex",
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "center"
     },
     skeletonWrapper: {
       padding: 48,
@@ -23,14 +23,14 @@ const useStyle = makeStyles((theme: Theme) =>
       right: 0,
       bottom: 0,
       margin: "auto",
-      display: "block",
+      display: "block"
     },
     loadingContentWrapper: {
       position: "relative",
       height: "calc(100% - 200px)",
       width: "calc(100% - 420px)",
-      minWidth: 400,
-    },
+      minWidth: 400
+    }
   })
 );
 
@@ -43,7 +43,7 @@ export interface ExtraProps {
 const defaultExtraProps: ExtraProps = {
   loading: true,
   loadingContent: <div />,
-  content: <div />,
+  content: <div />
 };
 
 export const Extra = React.memo((props: ExtraProps = defaultExtraProps) => {

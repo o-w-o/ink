@@ -11,7 +11,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "npx tsc -p tsconfig.build.json",
+    "build": "npx tsc -p tsconfig.build.json --skipLibCheck",
     "lint": "npx prettier --write src/**/*.{ts,tsx}",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

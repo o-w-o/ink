@@ -16,7 +16,7 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "build": "npx tsc -p ../../../tsconfig.build.json",
+    "build": "npx tsc -p tsconfig.build.json --skipLibCheck",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

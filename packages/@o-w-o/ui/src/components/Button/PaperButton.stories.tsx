@@ -7,7 +7,7 @@ import { PaperButton } from "./PaperButton";
 export default {
   title: "PaperButton",
   component: PaperButton,
-  decorators: [withKnobs],
+  decorators: [withKnobs]
 };
 
 export const 烛火录 = () => {

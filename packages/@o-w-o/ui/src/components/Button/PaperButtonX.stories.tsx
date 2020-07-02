@@ -7,7 +7,7 @@ import { PaperButtonX } from "./PaperButtonX";
 export default {
   title: "PaperButtonX",
   component: PaperButtonX,
-  decorators: [withKnobs],
+  decorators: [withKnobs]
 };
 
 export const 烛火录 = () => {
@@ -16,11 +16,11 @@ export const 烛火录 = () => {
     "direction",
     {
       left: "left",
-      right: "right",
+      right: "right"
     },
     "left",
     {
-      display: "inline-radio",
+      display: "inline-radio"
     }
   );
   const color = optionsKnob(
@@ -28,14 +28,20 @@ export const 烛火录 = () => {
     {
       red: "red",
       orange: "orange",
-      yellow: "yellow",
+      yellow: "yellow"
     },
     "orange",
     {
-      display: "inline-radio",
+      display: "inline-radio"
     }
   );
   return (
-    <PaperButtonX title={text("title", "烛火录")} icon={Keyboard} active={active} direction={direction} color={color} />
+    <PaperButtonX
+      title={text("title", "烛火录")}
+      icon={Keyboard}
+      active={active}
+      direction={direction}
+      color={color}
+    />
   );
 };
