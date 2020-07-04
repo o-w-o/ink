@@ -35,7 +35,6 @@
     "husky": "^4.2.5",
     "lerna": "^3.20.0",
     "lint-staged": "^10.2.0",
-    "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.0",
     "semver": "^7.3.0",
     "ts-node": "^8.10.0",
@@ -43,17 +42,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "packages/@o-w-o/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
-      "prettier --write",
-      "git add"
-    ],
-    "app/**/*.{js,jsx,ts,tsx,json,css,md,ts}": [
-      "prettier --write",
-      "git add"
+    "*.{json,md}": [
+      "prettier --write"
     ]
   },
   "config": {

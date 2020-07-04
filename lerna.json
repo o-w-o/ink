@@ -1,5 +1,7 @@
 {
-  "packages": ["packages/@o-w-o/*"],
+  "packages": [
+    "packages/@o-w-o/*"
+  ],
   "version": "independent",
   "npmClient": "npm",
   "publishConfig": {
@@ -8,15 +10,20 @@
   },
   "command": {
     "publish": {
-      "ignoreChanges": ["ignored-file", "*.md"],
-      "message": "chore($release): :bookmark: packages has published!",
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ],
+      "message": "chore($release): :bookmark: %s packages has published!",
       "version": {
         "allowBranch": ["master"]
       }
     },
     "bootstrap": {
-      "npmClientArgs": ["--no-package-lock"],
-      "hoist": ["typescript"]
+      "npmClientArgs": [],
+      "hoist": [
+        "typescript"
+      ]
     }
   }
 }

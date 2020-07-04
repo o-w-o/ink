@@ -53,6 +53,7 @@ class EpicToolkit {
           this.epic$.pipe(mergeMap(epic => epic(action$, state$, dependencies)))
         );
 
+      // @ts-ignore
       epicMiddleware.run(rootEpic);
     };
   }

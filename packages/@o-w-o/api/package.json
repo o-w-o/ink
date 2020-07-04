@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint": "npx prettier --write src/**/*.{ts,tsx}",
     "build": "tsc --skipLibCheck"
   },
   "keywords": [
