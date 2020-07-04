@@ -1,8 +1,40 @@
 version: 2
 updates:
-- package-ecosystem: npm
+- package-ecosystem: "npm"
+  # Files stored in `/` directory
   directory: "/"
   schedule:
-    interval: daily
-    time: "21:00"
+    interval: "weekly"
+    day: "sunday"
+    time: "4:00"
+  open-pull-requests-limit: 5
+  target-branch: "feature/deps"
+  reviewers: 
+    - o-w-o
+- package-ecosystem: npm
+  directory: "/packages/@o-w-o"
+  schedule:
+    interval: "monthly"
+    time: "4:00"
+  open-pull-requests-limit: 5
+  target-branch: "feature/deps"
+  reviewers: 
+    - o-w-o
+- package-ecosystem: npm
+  directory: "/app"
+  schedule:
+    interval: "daily"
+    time: "4:00"
   open-pull-requests-limit: 10
+  target-branch: "feature/deps"
+  reviewers: 
+    - o-w-o
+  
+- package-ecosystem: "github-actions"
+  # Workflow files stored in the
+  # default location of `.github/workflows`
+  schedule:
+    interval: "daily"
+  target-branch: "feature/workflows"
+  reviewers: 
+    - o-w-o
