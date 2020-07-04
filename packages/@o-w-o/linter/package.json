@@ -1,6 +1,6 @@
 {
   "name": "@o-w-o/linter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "o-w-o's linter",
   "repository": {
     "url": "https://github.com/o-w-o/ink.git"
@@ -50,7 +50,6 @@
     "stylelint-order": "^4.0.0",
     "typescript": "^3.9.2"
   },
-  "peerDependencies": {},
   "engines": {
     "node": ">= 8.0.0"
   }

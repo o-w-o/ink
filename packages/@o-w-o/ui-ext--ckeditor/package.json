@@ -1,6 +1,6 @@
 {
   "name": "@o-w-o/ui-ext--ckeditor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "o-w-o's lib",
   "license": "GPLv2",
   "repository": {
@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-balloon-block": "^17.0.0",
-    "@o-w-o/linter": "^1.0.0",
-    "@o-w-o/ui": "^1.0.0"
+    "@o-w-o/linter": "^1.0.2",
+    "@o-w-o/ui": "^1.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

@@ -1,6 +1,6 @@
 {
   "name": "@o-w-o/lib-ext--client-dev",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "o-w-o's client's lib ext",
   "repository": {
     "url": "https://github.com/o-w-o/ink.git"
@@ -12,13 +12,12 @@
   "author": "symbols@dingtalk.com",
   "license": "MIT",
   "dependencies": {
-    "@o-w-o/lib": "^1.0.0",
-    "@welldone-software/why-did-you-render": "^4.0.5",
+    "@o-w-o/lib": "^1.0.5",
     "@types/react": "^16.9.41",
     "@types/react-router": "^5.1.5",
     "@types/react-router-dom": "^5.1.5",
-    "webpack-bundle-analyzer": "^3.7.0",
-    "typescript": "^3.9.2"
-  },
-  "devDependencies": {}
+    "@welldone-software/why-did-you-render": "^4.0.5",
+    "typescript": "^3.9.2",
+    "webpack-bundle-analyzer": "^3.7.0"
+  }
 }
