@@ -6,7 +6,7 @@ updates:
   schedule:
     interval: "weekly"
     day: "sunday"
-    time: "4:00"
+    time: "04:00"
   open-pull-requests-limit: 5
   target-branch: "feature/deps"
   reviewers: 
@@ -15,7 +15,7 @@ updates:
   directory: "/packages/@o-w-o"
   schedule:
     interval: "monthly"
-    time: "4:00"
+    time: "04:00"
   open-pull-requests-limit: 5
   target-branch: "feature/deps"
   reviewers: 
@@ -24,7 +24,7 @@ updates:
   directory: "/app"
   schedule:
     interval: "daily"
-    time: "4:00"
+    time: "04:00"
   open-pull-requests-limit: 10
   target-branch: "feature/deps"
   reviewers: 
@@ -33,8 +33,10 @@ updates:
 - package-ecosystem: "github-actions"
   # Workflow files stored in the
   # default location of `.github/workflows`
+  directory: ".github/workflows"
   schedule:
     interval: "daily"
+    time: "04:00"
   target-branch: "feature/workflows"
   reviewers: 
     - o-w-o
