@@ -36,7 +36,7 @@
     "@ckeditor/ckeditor5-paragraph": "^19.0.0",
     "@ckeditor/ckeditor5-react": "^2.1.0",
     "@ckeditor/ckeditor5-table": "^19.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^19.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^20.0.0",
     "@ckeditor/ckeditor5-ui": "^19.0.0",
     "@ckeditor/ckeditor5-widget": "^19.0.0",
     "babel-loader": "^8.1.0",
