@@ -16,7 +16,7 @@
     "build": "node_modules/.bin/webpack --mode production"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-balloon-block": "^17.0.0",
+    "@ckeditor/ckeditor5-build-balloon-block": "^20.0.0",
     "@o-w-o/linter": "^1.0.2",
     "@o-w-o/ui": "^1.0.3"
   },
