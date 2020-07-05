@@ -26,7 +26,7 @@
     "@types/hapi__nes": "^11.0.3",
     "@types/hapi__vision": "^5.5.1",
     "@types/nedb": "^1.8.9",
-    "@types/node": "^12.12.15",
+    "@types/node": "^14.0.14",
     "@types/pino": "^6.0.0",
     "@types/qs": "^6.9.0",
     "@types/tape": "^4.13.0"
