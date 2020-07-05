@@ -3,8 +3,7 @@
   "version": "independent",
   "npmClient": "npm",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "command": {
     "publish": {
