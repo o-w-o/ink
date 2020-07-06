@@ -25,7 +25,7 @@
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^8.1.0",
+    "@commitlint/config-conventional": "^9.0.1",
     "@commitlint/config-lerna-scopes": "^8.1.0",
     "@commitlint/prompt": "^8.1.0",
     "@o-w-o/linter": "^1.0.1",
