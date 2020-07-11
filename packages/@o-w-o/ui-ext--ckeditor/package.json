@@ -2,7 +2,7 @@
   "name": "@o-w-o/ui-ext--ckeditor",
   "version": "1.0.1",
   "description": "o-w-o's lib",
-  "license": "GPLv2",
+  "license": "GPL-2.0-or-later",
   "repository": {
     "url": "https://github.com/o-w-o/ink.git"
   },

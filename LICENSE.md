@@ -1,3 +1,20 @@
+# 软件许可证 Software License Agreement
+
+o-w-o's app – https://github.com/o-w-o/ink
+
+Copyright (c) 2003-2020, o-w-o. All rights reserved.
+
+## GPL
+
+对于 app 和 @o-w-o/ui-ext--ckeditor，遵循并延续 ckeditor 的开源协议。
+
+Licensed under the terms of [GNU General Public License Version 2 or later](http://www.gnu.org/licenses/gpl.html).
+
+## MIT
+
+对于 除上其它部分代码，遵循并使用 MIT 开源协议。
+
+```
 MIT License
 
 Copyright (c) 2019 Loong
@@ -19,3 +36,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
