@@ -31,7 +31,7 @@
     "@ckeditor/ckeditor5-editor-classic": "^19.0.0",
     "@ckeditor/ckeditor5-essentials": "^19.0.0",
     "@ckeditor/ckeditor5-heading": "^19.0.0",
-    "@ckeditor/ckeditor5-inspector": "^1.5.0",
+    "@ckeditor/ckeditor5-inspector": "^2.2.0",
     "@ckeditor/ckeditor5-link": "^19.0.0",
     "@ckeditor/ckeditor5-paragraph": "^19.0.0",
     "@ckeditor/ckeditor5-react": "^2.1.0",
