@@ -29,7 +29,7 @@
     "@ckeditor/ckeditor5-core": "^19.0.0",
     "@ckeditor/ckeditor5-dev-utils": "^20.0.0",
     "@ckeditor/ckeditor5-editor-classic": "^19.0.0",
-    "@ckeditor/ckeditor5-essentials": "^19.0.0",
+    "@ckeditor/ckeditor5-essentials": "^26.0.0",
     "@ckeditor/ckeditor5-heading": "^19.0.0",
     "@ckeditor/ckeditor5-inspector": "^1.5.0",
     "@ckeditor/ckeditor5-link": "^19.0.0",
