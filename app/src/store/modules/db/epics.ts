@@ -1,12 +1,12 @@
 import { ActionsObservable, combineEpics } from "redux-observable";
 import { filter, mergeMap, tap } from "rxjs/operators";
 
-import { IReducerAction } from "@o-w-o/lib-ext--client";
+import { IReducerAction } from "../../../framework/data";
 import { dbHelper } from "./lib";
 import {
   dispatchCacheStore,
   storeToken,
-  triggerCacheStore
+  triggerCacheStore,
 } from "@o-w-o/stores/db/emitter";
 
 export const triggerCacheStoreEpics = (
@@ -32,7 +32,7 @@ export const triggerStoreTokenEpics = (
       console.log("rxdb trigger evt[storeToken] -> ", evt);
     }),
 
-    tap(async action => {
+    tap(async (action) => {
       await dbHelper.db.tokens.upsert(action.payload);
     }),
 

@@ -1,0 +1,32 @@
+.quote {
+    position: relative;
+}
+
+.quoteContent {
+    position: relative;
+    font-family: 'Source Han Serif CN', 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}
+.quoteContent:after {
+    content: "“";
+    position: absolute;
+    left: -36px;
+    font-size: 128px;
+    color: #d6d6d6;
+    top: 12px;
+    z-index: 1;
+}
+.quoteOrigin {
+    position: relative;
+    display: block;
+    text-align: right;
+    margin-top: 2rem;
+    font-size: smaller;
+    color: #666;
+}
+.quoteHighlight {
+    font-style: normal;
+    color: #d32f2f;
+}

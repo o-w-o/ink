@@ -43,46 +43,46 @@ export const tokenSchema: RxJsonSchema<Token> = {
   properties: {
     accessToken: {
       type: "string",
-      primary: true
+      primary: true,
     },
     refreshToken: {
-      type: "string"
+      type: "string",
     },
     sts: {
-      type: "string"
-    }
-  }
+      type: "string",
+    },
+  },
 };
 
 export const tokenDocMethods: TokenDocMethods = {
-  getAuthorizationHeader: function(this: TokenDocument) {
+  getAuthorizationHeader: function (this: TokenDocument) {
     return {
       key: TokenConfig.header,
-      val: `${TokenConfig.mark} ${this.accessToken}`
+      val: `${TokenConfig.mark} ${this.accessToken}`,
     };
-  }
+  },
 };
 
 export const tokenCollectionMethods: TokenCollectionMethods = {
-  fetch: async function(this: TokenCollection) {
+  fetch: async function (this: TokenCollection) {
     const list = await this.find().exec();
     return list[0];
   },
-  countAllDocuments: async function(this: TokenCollection) {
+  countAllDocuments: async function (this: TokenCollection) {
     const allDocs = await this.find().exec();
     return allDocs.length;
-  }
+  },
 };
 
 export const tokenMiddlewareHooks = {
-  postSave: function(token: Token, tokenDocument: TokenDocument) {
+  postSave: function (token: Token, tokenDocument: TokenDocument) {
     tokenPersistence.setToken(tokenDocument);
-  }
+  },
 };
 
 export const tokensDbModule = {
   name: "tokens",
   schema: tokenSchema,
   methods: tokenDocMethods,
-  statics: tokenCollectionMethods
+  statics: tokenCollectionMethods,
 };

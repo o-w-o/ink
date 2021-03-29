@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "o-w-o's app and lib packages.",
   "private": true,
-  "workspaces": [
-    "packages/@o-w-o/*",
-    "app/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/@o-w-o/*"
+    ]
+  },
   "scripts": {
     "link": "lerna link",
     "bootstrap": "lerna bootstrap --hoist",
@@ -20,25 +21,25 @@
     "release:changelog": "npm run release:prepare && npm run release:publish:changelog",
     "changelog:init": "lerna exec --concurrency 1 --stream -- 'conventional-changelog --preset angular --release-count 0 --commit-path $PWD --pkg $PWD/package.json --outfile $PWD/CHANGELOG.md --verbose --lerna-package $LERNA_PACKAGE_NAME'",
     "import": "lerna import",
-    "clean": "rimraf packages/test/* packages/**/temp/*"
+    "clean": "lerna clean -y"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^8.1.0",
-    "@commitlint/config-lerna-scopes": "^8.1.0",
-    "@commitlint/prompt": "^8.1.0",
-    "@o-w-o/linter": "^1.0.1",
+  "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/config-lerna-scopes": "^11.0.0",
+    "@commitlint/prompt": "^11.0.0",
+    "@o-w-o/rc": "^1.0.1",
     "commitizen": "^4.1.0",
     "conventional-changelog": "^3.1.10",
     "conventional-changelog-cli": "^2.0.0",
+    "eslint": "^7.14.0",
     "husky": "^4.2.5",
-    "lerna": "^3.20.0",
+    "lerna": "^3.22.1",
     "lint-staged": "^10.2.0",
+    "prettier": "^2.2.0",
     "rimraf": "^3.0.0",
     "semver": "^7.3.0",
-    "ts-node": "^8.10.0",
-    "typescript": "^3.9.2"
+    "typescript": "^4.0.0"
   },
   "husky": {
     "hooks": {
@@ -63,5 +64,5 @@
     "url": "https://github.com/o-w-o/ink.git"
   },
   "author": "symbols@dingtalk.com",
-  "license": "GPL-2.0-or-later"
+  "license": "Apache-2.0-or-LGPL-2.0-or-later"
 }

@@ -1,0 +1,24 @@
+.paperEntryWrapper {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  padding: 0 6vw 0 6vw;
+}
+.paperEntry {
+  position: relative;
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.paper {
+  height: calc(100vh - 64px);
+  width: calc(50vw - 64px);
+}

@@ -1,14 +1,14 @@
-import RxDB, { RxDatabase } from "rxdb";
+import { RxDatabase, addRxPlugin, createRxDatabase } from "rxdb";
 import { HeroCollection, heroesDbModule } from "./modules/sample";
 import {
   TokenCollection,
   tokenMiddlewareHooks,
-  tokensDbModule
+  tokensDbModule,
 } from "./modules/tokens";
-import { IEpicInitializer } from "@o-w-o/lib-ext--client";
+import { IEpicInitializer } from "../../../framework";
 import { triggerCacheStore } from "./emitter";
 
-RxDB.plugin(require("pouchdb-adapter-idb"));
+addRxPlugin(require("pouchdb-adapter-idb"));
 
 type MyDatabaseCollections = {
   heroes: HeroCollection;
@@ -24,7 +24,7 @@ class RxDBToolkit implements IEpicInitializer {
 
   async $o(cb: Function) {
     while (this.pending) {
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         setTimeout(resolve, 100);
       });
     }
@@ -42,10 +42,10 @@ class RxDBToolkit implements IEpicInitializer {
   }
 
   async initDb() {
-    this.db = await RxDB.create<MyDatabaseCollections>({
+    this.db = await createRxDatabase<MyDatabaseCollections>({
       name: "my_db",
       adapter: "idb",
-      multiInstance: true
+      multiInstance: true,
     });
 
     return this;
@@ -70,9 +70,9 @@ class RxDBToolkit implements IEpicInitializer {
           passportId: "myId",
           firstName: "piotr",
           lastName: "potter",
-          age: 5
+          age: 5,
         })
-        .then(v => v.toJSON())
+        .then((v) => v.toJSON())
     );
   }
 

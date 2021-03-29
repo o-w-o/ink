@@ -31,37 +31,37 @@ export const heroSchema: RxJsonSchema<Hero> = {
   properties: {
     passportId: {
       type: "string",
-      primary: true
+      primary: true,
     },
     firstName: {
-      type: "string"
+      type: "string",
     },
     lastName: {
-      type: "string"
+      type: "string",
     },
     age: {
-      type: "integer"
-    }
+      type: "integer",
+    },
   },
-  required: ["firstName", "lastName"]
+  required: ["firstName", "lastName"],
 };
 
 export const heroDocMethods: HeroDocMethods = {
-  scream: function(this: HeroDocument, what: string) {
+  scream: function (this: HeroDocument, what: string) {
     return this.firstName + " screams: " + what.toUpperCase();
-  }
+  },
 };
 
 export const heroCollectionMethods: HeroCollectionMethods = {
-  countAllDocuments: async function(this: HeroCollection) {
+  countAllDocuments: async function (this: HeroCollection) {
     const allDocs = await this.find().exec();
     return allDocs.length;
-  }
+  },
 };
 
 export const heroesDbModule = {
   name: "heroes",
   schema: heroSchema,
   methods: heroDocMethods,
-  statics: heroCollectionMethods
+  statics: heroCollectionMethods,
 };

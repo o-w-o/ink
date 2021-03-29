@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: [
-    require.resolve("@o-w-o/linter/.eslintrc"),
+    require.resolve("@o-w-o/rc/.eslintrc"),
   ],
   rules: {
     "prettier/prettier": "warn",

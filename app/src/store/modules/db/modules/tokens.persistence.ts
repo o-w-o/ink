@@ -20,7 +20,7 @@ export class TokenPersistence {
       ? this.token.getAuthorizationHeader()
       : {
           key: "",
-          val: ""
+          val: "",
         };
   }
 }

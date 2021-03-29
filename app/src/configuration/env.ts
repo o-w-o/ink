@@ -1,6 +1,6 @@
 export enum EnvEnum {
   PRODUCTION = "production",
-  DEVELOPMENT = "development"
+  DEVELOPMENT = "development",
 }
 
 export function getEnv(): EnvEnum {

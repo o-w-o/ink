@@ -1,0 +1,20 @@
+.btnWrapper {
+  display: inline-block;
+  margin: 4px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+
+  overflow: hidden;
+  transition: all .3s;
+}
+
+.avatar {
+  height: 100%;
+  width: 100%;
+}

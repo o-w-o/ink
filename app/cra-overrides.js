@@ -3,42 +3,38 @@ const {
   addBundleVisualizer,
   addPostcssPlugins,
   addWebpackAlias,
-  addDecoratorsLegacy,
-  useEslintRc,
-  enableEslintTypescript
 } = require("customize-cra");
+const { compose } = require("react-app-rewired");
 const path = require("path");
+const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = {
   // The Webpack config to use when compiling your react app for development or production.
-  webpack: function(_config_, env) {
+  webpack: function (config, env) {
     // console.debug("env ->", env);
     // console.log("config ->", config);
 
     return override(
-      useEslintRc(path.resolve(__dirname, "../.eslintrc.js")),
-      enableEslintTypescript(),
       addWebpackAlias({
         "@o-w-o/stores": path.resolve(__dirname, "src/store/modules"),
         "@o-w-o/templates": path.resolve(__dirname, "src/template/modules"),
-        "@o-w-o/views": path.resolve(__dirname, "src/view/modules")
+        "@o-w-o/views": path.resolve(__dirname, "src/view/modules"),
       }),
-      addDecoratorsLegacy(),
       addPostcssPlugins([
-        require("postcss-preset-env")({
+        postcssPresetEnv({
           stage: 2,
           features: {
-            "nesting-rules": true
+            "nesting-rules": true,
           },
-          browsers: "last 2 versions"
-        })
+          browsers: "last 2 versions",
+        }),
       ]),
       process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer()
-    )(_config_, env);
+    )(config, env);
   },
   // The Jest config to use when running your jest tests - note that the normal rewires do not
   // work here.
-  jest: function(config) {
+  jest: function (config) {
     // ...add your jest config customisation...
     // Example: enable/disable some tests based on environment variables in the .env file.
     if (!config.testPathIgnorePatterns) {
@@ -57,22 +53,22 @@ module.exports = {
   // The function to use to create a webpack dev server configuration when running the development
   // server with 'npm run start' or 'yarn start'.
   // Example: set the dev server to use a specific certificate in https.
-  devServer: function(configFunction) {
+  devServer: function (configFunction) {
     // Return the replacement function for create-react-app to use to generate the Webpack
     // Development Server config. "configFunction" is the function that would normally have
     // been used to generate the Webpack Development server config - you can use it to create
     // a starting configuration to then modify instead of having to create a config from scratch.
-    return function(proxy, allowedHost) {
+    return function (proxy, allowedHost) {
       // Create the default config by calling configFunction with the proxy/allowedHost parameters
       const config = configFunction(
         {
           "/api": {
             target: "http://localhost:8080",
             pathRewrite: {
-              "^/api": ""
+              "^/api": "",
             },
-            changeOrigin: true
-          }
+            changeOrigin: true,
+          },
         },
         allowedHost
       );
@@ -92,11 +88,11 @@ module.exports = {
     };
   },
   // The paths config to use when compiling your react app for development or production.
-  paths: function(paths, env) {
+  paths: function (paths, env) {
     console.debug("paths ->", paths);
 
     return Object.assign(paths, {
-      appBuild: path.join(__dirname, "dist/public")
+      appBuild: path.join(__dirname, "dist/public"),
     });
-  }
+  },
 };

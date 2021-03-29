@@ -1,30 +1,30 @@
-import { combineReducers } from "redux";
-import { combineEpics } from "redux-observable";
+import { combineReducers } from "@reduxjs/toolkit";
 
 import {
-  epicToolkit,
-  storeToolkit,
+  EpicManager,
   preloaderState,
-  routerReducer
-} from "@o-w-o/lib-ext--client";
+  routerReducer,
+  StoreBuilder,
+} from "../framework";
 
 import { dbStore } from "./modules/db";
 
-const epics = combineEpics(dbStore.epic);
-
-epicToolkit.setEpics(epics).setEpicInitializers([dbStore.helper]);
-
-export const store = history => {
+export const store = (history) => {
   const reducers = combineReducers({
-    router: routerReducer
+    router: routerReducer,
   });
 
-  return storeToolkit
+  const epics = [dbStore.epic];
+
+  return StoreBuilder.INSTANCE.setupRouterMiddleware(history)
     .setupReducer(reducers)
     .setupStore(preloaderState)
-    .attachEpicsRunner(epicToolkit.getRunner())
-    .setupRouterMiddleware(history)
-    .buildStore();
+    .attachEpicsRunner(
+      EpicManager.INSTANCE.setEpics(epics)
+        .setEpicInitializers([dbStore.helper])
+        .generateEpicRunner()
+    )
+    .build();
 };
 
-export { history } from "@o-w-o/lib-ext--client";
+export { history } from "../framework/data/reducers";

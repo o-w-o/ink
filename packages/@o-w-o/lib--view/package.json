@@ -1,0 +1,33 @@
+{
+  "name": "@o-w-o/lib--view",
+  "version": "1.0.0",
+  "description": "o-w-o's view dependency",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/o-w-o/ink.git"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.0.0",
+    "connected-react-router": "^6.0.0",
+    "pouchdb-adapter-idb": "^7.0.0",
+    "react-redux": "^7.0.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux-observable": "^1.0.0",
+    "rxdb": "^9.0.0",
+    "rxjs": "^6.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

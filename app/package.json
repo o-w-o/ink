@@ -3,18 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@o-w-o/lib-ext--server": "^1.0.2"
-  },
-  "optionalDependencies": {
     "@o-w-o/api": "^1.0.0",
-    "@o-w-o/lib": "^1.0.0",
-    "@o-w-o/lib-ext--client": "^1.0.2",
-    "@o-w-o/lib-ext--client-dev": "^1.0.0",
-    "@o-w-o/linter": "^1.0.0",
-    "@o-w-o/ui": "^1.0.2"
+    "@o-w-o/lib--ui": "^1.0.0",
+    "@o-w-o/lib--view": "^1.0.0",
+    "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "@o-w-o/lib-ext--server-dev": "^1.0.1"
+    "@types/lodash": "^4.0.0",
+    "@o-w-o/lib--ui-dev": "^1.0.0",
+    "@o-w-o/lib--view-dev": "^1.0.0",
+    "@o-w-o/rc": "^1.0.0",
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.0.0",
+    "react-scripts": "^4.0.0"
   },
   "scripts": {
     "analyze": "BUNDLE_VISUALIZE=1 react-app-rewired start",
@@ -22,16 +23,11 @@
     "lint": "npx prettier --write src/**/*.{ts,tsx}",
     "clear": "npx rimraf ./node_modules",
     "bootstrap": "sh script/bootstrap.sh",
-    "start": "nodemon ./server.js",
-    "start:server": "ts-node --compiler typescript --project tsconfig.server.json server.ts",
-    "start:client": "react-app-rewired start",
-    "build:server": "tsc --project tsconfig.server.json",
-    "build:client": "react-app-rewired build",
-    "build": "sh script/build.sh",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom --watchAll=false --passWithNoTests",
     "test:watch": "react-scripts test",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject"
+    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
   },
   "config-overrides-path": "cra-overrides",
   "browserslist": {
@@ -46,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-2.0-or-later"
+  "license": "Apache 2.0"
 }

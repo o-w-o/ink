@@ -1,0 +1,68 @@
+.DefaultSpinner {
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin: 100px auto;
+}
+
+.DotO, .DotI {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    animation: dotBounce 2.0s infinite ease-in-out;
+}
+
+.DotI {
+    animation-delay: -1.0s;
+}
+
+@keyframes dotBounce {
+    0%, 100% {
+        transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+    }
+}
+
+.DotSpinner {
+    width: 40px;
+    height: 40px;
+
+    position: relative;
+    margin: 100px auto;
+
+    text-align: center;
+    animation: dotRotate 2.0s infinite linear;
+}
+
+.DotX, .DotY {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #333;
+    border-radius: 100%;
+
+    animation: dotBounce 2.0s infinite ease-in-out;
+}
+
+.DotY {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1.0s;
+}
+
+@keyframes dotRotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}

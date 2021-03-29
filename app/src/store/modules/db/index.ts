@@ -4,7 +4,7 @@ import {
   dispatchCacheStore,
   storeToken,
   triggerCacheStore,
-  tryCacheStore
+  tryCacheStore,
 } from "@o-w-o/stores/db/emitter";
 
 export const dbStore = {
@@ -12,8 +12,8 @@ export const dbStore = {
     triggerCacheStore,
     dispatchCacheStore,
     tryCacheStore,
-    storeToken
+    storeToken,
   },
   epic: dbEpic,
-  helper: dbHelper
+  helper: dbHelper,
 };
